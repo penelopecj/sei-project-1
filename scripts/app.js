@@ -22,6 +22,7 @@ function init() {
 
   cells.forEach(cell => {
     const coral = parseInt(cell.dataset.id)
+    // horizontal walls
     if (coral >= 0 && coral <= 19
     || coral >= 28 && coral <= 31
     || coral >= 48 && coral <= 51
@@ -31,12 +32,15 @@ function init() {
     || coral >= 53 && coral <= 57
     || coral >= 73 && coral <= 77
     || coral >= 102 && coral <= 117
-    || coral >= 000 && coral <= 000
-    || coral >= 000 && coral <= 000
+    || coral >= 141 && coral <= 145
+    || coral >= 161 && coral <= 165
+    || coral >= 181 && coral <= 185
+    || coral >= 201 && coral <= 205
     || coral >= 207 && coral <= 212
-    || coral >= 000 && coral <= 000
-    || coral >= 000 && coral <= 000
-    || coral >= 000 && coral <= 000
+    || coral >= 154 && coral <= 158
+    || coral >= 174 && coral <= 178
+    || coral >= 194 && coral <= 198
+    || coral >= 214 && coral <= 218
     || coral >= 327 && coral <= 332
     || coral >= 342 && coral <= 357
     || coral >= 380 && coral <= 399
