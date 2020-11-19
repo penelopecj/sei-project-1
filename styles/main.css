@@ -46,14 +46,23 @@ header h1 {
   width: 5%; 
 }
 
+/* FISH CLASS */
 .grid div.fish {
   background-image: url('../images/fish.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
 
+/* WALL CLASS */
 .grid div.wall {
   background-color: coral;
+}
+
+/* PAC-SHARK CLASS */
+.grid div.shark {
+  background-image: url('../images/pac-shark.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 

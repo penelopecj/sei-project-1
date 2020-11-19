@@ -6,6 +6,7 @@ function init() {
   const cellCount = width * width
   let fishClass = 'fish'
   let wallClass = 'wall'
+  let sharkClass = 'shark'
 
 
   // make div in css
@@ -19,6 +20,12 @@ function init() {
     grid.appendChild(cell)
     cells.push(cell)
   }
+
+  // lightly style board
+
+  // make obvious what everything is with classes and semantic html tags
+
+  // add wall and fish styling as borders and background images
 
   cells.forEach(cell => {
     const coral = parseInt(cell.dataset.id)
@@ -90,19 +97,11 @@ function init() {
     }
   })
 
-
-
-  // for (let i = 0; i < width; i++) {
-  //   cells[i].classList.add(fishClass)
-  // }
-
-  // lightly style board
-
-
-  // make obvious what everything is with classes and semantic html tags
-
-  // add wall and fish styling as borders and background images
-
+  cells[365].classList.add('shark')
+  // - get shark element and give it event listener to move with arrow keys around the board ('keydown')
+  // - create variable for tracking sharky's place on the grid
+  // - update sharky's place and remove sharky from previous place with each move
+  
 
 
 
