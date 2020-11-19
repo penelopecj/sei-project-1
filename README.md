@@ -1,1 +1,3 @@
-# sei-project-1
+# SEI Project 1
+
+By Penny Jungreis
