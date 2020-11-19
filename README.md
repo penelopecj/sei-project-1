@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SEI Project 1
 
 by Penny Jungreis
@@ -14,6 +13,6 @@ by Penny Jungreis
 
 lorem ipsum 
 
-## Trumphs
+## Triumphs
 
 lorem ipsum
