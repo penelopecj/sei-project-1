@@ -4,17 +4,15 @@ function init() {
 
   const width = 20
   const cellCount = width * width
-  let fishClass = 'fish'
-  let wallClass = 'wall'
-  let sharkClass = 'shark'
-  let sharkPosition = 365
+  const fishClass = 'fish'
+  const wallClass = 'wall'
+  const sharkClass = 'shark'
 
+  let sharkPosition = 365
 
   // make div in css
 
-
   // make grid using JS
-
   for (let i = 0; i < cellCount; i++) {
     const cell = document.createElement('div')
     cell.dataset.id = i
@@ -27,8 +25,6 @@ function init() {
   // make obvious what everything is with classes and semantic html tags
 
   // add wall and fish styling as borders and background images
-
-  //tim, elsie, dougal doing pac man
 
   cells.forEach(cell => {
     const coral = parseInt(cell.dataset.id)
@@ -128,28 +124,39 @@ function init() {
     }
   })
 
+  function checkIfWall(position) {
+    return cells[position].classList.contains(wallClass)
+  }
+
   function handleKeyUp(event) {
     removeShark(sharkPosition)
     removeFish(sharkPosition)
 
-    switch(event.keyCode) {
+    // const sharkX = sharkPosition % width
+    // const sharkY = Math.floor(sharkPosition / width)
+    // console.log('x =', sharkX, 'y =', sharkY)
+    // if (sharkX < 18)
+    // if (sharkX > 1)
+    // if (sharkY > 1) 
+    //  if (sharkY < 18) 
+
+    switch (event.keyCode) {
       case 39: //move right
-        sharkPosition ++   
-        addShark(sharkPosition)
+        if (!checkIfWall(sharkPosition + 1)) sharkPosition ++ 
         break
       case 37: // move left
-        sharkPosition --   
-        addShark(sharkPosition)
+        if (!checkIfWall(sharkPosition - 1)) sharkPosition --   
         break
-      case 38:
-        addShark(sharkPosition -= width)
+      case 38: // move up
+        if (!checkIfWall(sharkPosition - width)) sharkPosition -= width
         break
-      case 40:
-        addShark(sharkPosition += width)
+      case 40: //move down
+        if (!checkIfWall(sharkPosition + width)) sharkPosition += width
         break
       default:
         console.log('Not a valid key!')
     }
+    addShark(sharkPosition)
   }
 
   function addShark(position) {
