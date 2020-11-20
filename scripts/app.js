@@ -7,6 +7,7 @@ function init() {
   let fishClass = 'fish'
   let wallClass = 'wall'
   let sharkClass = 'shark'
+  let sharkPosition = 365
 
 
   // make div in css
@@ -48,6 +49,18 @@ function init() {
     || coral >= 174 && coral <= 178
     || coral >= 194 && coral <= 198
     || coral >= 214 && coral <= 218
+    || coral >= 221 && coral <= 225
+    || coral >= 234 && coral <= 238
+    || coral >= 227 && coral <= 232
+    || coral >= 249 && coral <= 250
+    || coral >= 269 && coral <= 270
+    || coral >= 262 && coral <= 265
+    || coral >= 274 && coral <= 277
+    || coral >= 294 && coral <= 297
+    || coral >= 314 && coral <= 317
+    || coral >= 282 && coral <= 285
+    || coral >= 302 && coral <= 305
+    || coral >= 307 && coral <= 312
     || coral >= 327 && coral <= 332
     || coral >= 342 && coral <= 357
     || coral >= 380 && coral <= 399
@@ -90,16 +103,63 @@ function init() {
     || coral === 310 + 19
     || coral === 320 + 19
     || coral === 340 + 19
-    || coral === 360 + 19) {
+    || coral === 360 + 19
+    // random walls
+    || coral === 127
+    || coral === 132
+    || coral === 147
+    || coral === 149
+    || coral === 150
+    || coral === 152
+    || coral === 169
+    || coral === 170
+    || coral === 187
+    || coral === 192
+    || coral === 267
+    || coral === 287
+    || coral === 272
+    || coral === 292
+    ) {
       cell.classList.add(wallClass)
     } else {
       cell.classList.add(fishClass)
     }
   })
 
-  cells[365].classList.add('shark')
-  // - get shark element and give it event listener to move with arrow keys around the board ('keydown')
+  function handleKeyUp(event) {
+    removeShark(sharkPosition)
+
+    switch(event.keyCode) {
+      case 39: //move right
+        sharkPosition ++   
+        addShark(sharkPosition)
+        break
+      case 37: // move left
+        sharkPosition --   
+        addShark(sharkPosition)
+        break
+      case 38:
+        addShark(sharkPosition -= width)
+        break
+      case 40:
+        addShark(sharkPosition += width)
+        break
+      default:
+        console.log('Not a valid key!')
+    }
+  }
+
+  function addShark(position) {
+    cells[position].classList.add('shark')
+  }
+
+  function removeShark(position) {
+    cells[position].classList.remove('shark')
+  }
+
+  document.addEventListener('keydown', handleKeyUp)
   // - create variable for tracking sharky's place on the grid
+  // - add an event listener to move with arrow keys around the board ('keydown')
   // - update sharky's place and remove sharky from previous place with each move
   
 

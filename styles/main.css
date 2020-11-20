@@ -40,7 +40,7 @@ header h1 {
 }
 
 .grid div {
-  border: 1px solid rgb(109, 109, 109); 
+  /* border: 1px solid grey;  */
   flex-grow: 1;
   height: 5%;
   width: 5%; 
@@ -55,12 +55,14 @@ header h1 {
 
 /* WALL CLASS */
 .grid div.wall {
-  background-color: coral;
+  background-image: url('../images/coral.jpg');
+  background-size: cover;
+  border: 1px solid rgba(87, 67, 213, 0.495);
 }
 
 /* PAC-SHARK CLASS */
 .grid div.shark {
-  background-image: url('../images/pac-shark.png');
+  background-image: url('../images/shark.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -76,4 +78,5 @@ header h1 {
 footer {
   display: flex;
   justify-content: center;
+  color: white;
 }
