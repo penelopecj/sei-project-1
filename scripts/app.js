@@ -1,16 +1,22 @@
+// ! Glitch on cell 23 - thinks that player has lost even though no orca
+
 function init() {
   const grid = document.querySelector('.grid')
+  const startBtn = document.querySelector('#start')
+  const playAgainBtn = document.querySelector('#play-again')
   const cells = []
 
   const width = 20
   const cellCount = width * width
   const fishClass = 'fish'
+  const shellClass = 'shell'
   const wallClass = 'wall'
   const sharkClass = 'shark'
   const orcaClass = 'orca'
 
   let sharkPosition = 365
-  let orcaPosition = 25
+  let orcaOnePosition = 20
+  let orcaTwoPosition = 38
 
   // make div in css
 
@@ -29,99 +35,102 @@ function init() {
   // add wall and fish styling as borders and background images
   // ! VERY LONG WALL BUILDER LOOP
   cells.forEach(cell => {
-    const coral = parseInt(cell.dataset.id)
+    const cellId = parseInt(cell.dataset.id)
     // horizontal walls
-    if (coral >= 0 && coral <= 19
-    || coral >= 28 && coral <= 31
-    || coral >= 42 && coral <= 46
-    || coral >= 48 && coral <= 51
-    || coral >= 53 && coral <= 57
-    || coral >= 62 && coral <= 66
-    || coral >= 68 && coral <= 71
-    || coral >= 73 && coral <= 77
-    || coral >= 102 && coral <= 117
-    || coral >= 141 && coral <= 145
-    || coral >= 154 && coral <= 158
-    || coral >= 161 && coral <= 165
-    || coral >= 174 && coral <= 178
-    || coral >= 181 && coral <= 185
-    || coral >= 207 && coral <= 212
-    || coral >= 214 && coral <= 218
-    || coral >= 221 && coral <= 225
-    || coral >= 227 && coral <= 232
-    || coral >= 234 && coral <= 238
-    || coral >= 249 && coral <= 250
-    || coral >= 262 && coral <= 265
-    || coral >= 269 && coral <= 270
-    || coral >= 274 && coral <= 277
-    || coral >= 282 && coral <= 285
-    || coral >= 294 && coral <= 297
-    || coral >= 302 && coral <= 305
-    || coral >= 307 && coral <= 312
-    || coral >= 314 && coral <= 317
-    || coral >= 327 && coral <= 332
-    || coral >= 342 && coral <= 357
-    || coral >= 380 && coral <= 399
+    if (cellId >= 0 && cellId <= 19
+    || cellId >= 28 && cellId <= 31
+    || cellId >= 42 && cellId <= 46
+    || cellId >= 48 && cellId <= 51
+    || cellId >= 53 && cellId <= 57
+    || cellId >= 62 && cellId <= 66
+    || cellId >= 68 && cellId <= 71
+    || cellId >= 73 && cellId <= 77
+    || cellId >= 102 && cellId <= 117
+    || cellId >= 141 && cellId <= 145
+    || cellId >= 154 && cellId <= 158
+    || cellId >= 161 && cellId <= 165
+    || cellId >= 174 && cellId <= 178
+    || cellId >= 181 && cellId <= 185
+    || cellId >= 207 && cellId <= 212
+    || cellId >= 214 && cellId <= 218
+    || cellId >= 221 && cellId <= 225
+    || cellId >= 227 && cellId <= 232
+    || cellId >= 234 && cellId <= 238
+    || cellId >= 249 && cellId <= 250
+    || cellId >= 262 && cellId <= 265
+    || cellId >= 269 && cellId <= 270
+    || cellId >= 274 && cellId <= 277
+    || cellId >= 282 && cellId <= 285
+    || cellId >= 294 && cellId <= 297
+    || cellId >= 302 && cellId <= 305
+    || cellId >= 307 && cellId <= 312
+    || cellId >= 314 && cellId <= 317
+    || cellId >= 327 && cellId <= 332
+    || cellId >= 342 && cellId <= 357
+    || cellId >= 380 && cellId <= 399
     // left wall
-    || coral === 20
-    || coral === 40
-    || coral === 60
-    || coral === 80
-    || coral === 100
-    || coral === 120
-    || coral === 140
-    || coral === 160
-    || coral === 180
-    || coral === 210
-    || coral === 220
-    || coral === 240
-    || coral === 260
-    || coral === 280
-    || coral === 300
-    || coral === 320
-    || coral === 340
-    || coral === 360
+    || cellId === 20
+    || cellId === 40
+    || cellId === 60
+    || cellId === 80
+    || cellId === 100
+    || cellId === 120
+    || cellId === 140
+    || cellId === 160
+    || cellId === 180
+    || cellId === 210
+    || cellId === 220
+    || cellId === 240
+    || cellId === 260
+    || cellId === 280
+    || cellId === 300
+    || cellId === 320
+    || cellId === 340
+    || cellId === 360
     // right wall
-    || coral === 20 + 19
-    || coral === 40 + 19
-    || coral === 60 + 19
-    || coral === 80 + 19
-    || coral === 100 + 19
-    || coral === 120 + 19
-    || coral === 140 + 19
-    || coral === 160 + 19
-    || coral === 200 + 19
-    || coral === 220 + 19
-    || coral === 240 + 19
-    || coral === 260 + 19
-    || coral === 280 + 19
-    || coral === 300 + 19
-    || coral === 310 + 19
-    || coral === 320 + 19
-    || coral === 340 + 19
-    || coral === 360 + 19
+    || cellId === 20 + 19
+    || cellId === 40 + 19
+    || cellId === 60 + 19
+    || cellId === 80 + 19
+    || cellId === 100 + 19
+    || cellId === 120 + 19
+    || cellId === 140 + 19
+    || cellId === 160 + 19
+    || cellId === 200 + 19
+    || cellId === 220 + 19
+    || cellId === 240 + 19
+    || cellId === 260 + 19
+    || cellId === 280 + 19
+    || cellId === 300 + 19
+    || cellId === 310 + 19
+    || cellId === 320 + 19
+    || cellId === 340 + 19
+    || cellId === 360 + 19
     // random walls
-    || coral === 127
-    || coral === 132
-    || coral === 147
-    || coral === 149
-    || coral === 150
-    || coral === 152
-    || coral === 169
-    || coral === 170
-    || coral === 187
-    || coral === 192
-    || coral === 267
-    || coral === 287
-    || coral === 272
-    || coral === 292
-    ) {
+    || cellId === 127
+    || cellId === 132
+    || cellId === 147
+    || cellId === 149
+    || cellId === 150
+    || cellId === 152
+    || cellId === 169
+    || cellId === 170
+    || cellId === 187
+    || cellId === 192
+    || cellId === 267
+    || cellId === 287
+    || cellId === 272
+    || cellId === 292) {
       cell.classList.add(wallClass)
+    } else if (cellId === 41
+      || cellId === 58
+      || cellId === 281
+      || cellId === 298) {
+      cell.classList.add(shellClass)
     } else {
       cell.classList.add(fishClass)
     }
   })
-
 
   // ? GAME PLAY FUNCTIONS *********
   function checkIfWall(position) {
@@ -148,27 +157,46 @@ function init() {
     cells[position].classList.remove(fishClass)
   }
 
+  function removeShell(position) {
+    cells[position].classList.remove(shellClass)
+  }
 
-  // MAKE GHOST KILLER WHALES:
-  // - give killer whales the ability to move to new tiles and disappear from old ones
-  // - set random number
-  // - set random movement for whales with numbers
-  // * MOVE ORCA FUNCTION **********
-  const randomPosition = Math.floor(Math.random() * 100)
-  if (!checkIfWall(randomPosition)) orcaPosition = randomPosition
+  // ? MOVE ORCA FUNCTION **********
+  setInterval(() => {
+    removeOrca(orcaOnePosition)
+    removeOrca(orcaTwoPosition)
 
-  // * MOVE PAC-SHARK FUNCTION **********
-  function handleKeyUp(event) {
+    // orca1 path
+    if (orcaOnePosition < 27) {
+      orcaOnePosition ++
+    } else if (orcaOnePosition > 81 && orcaOnePosition <= 87) {
+      orcaOnePosition --
+    } else if (orcaOnePosition >= 27 && orcaOnePosition < 102) {
+      orcaOnePosition += width
+    } else {
+      orcaOnePosition = 21
+    }
+    // orca2 path
+    if (orcaTwoPosition < 44) {
+      orcaTwoPosition --
+    } else if (orcaTwoPosition > 98 && orcaTwoPosition <= 104) {
+      orcaTwoPosition ++
+    } else if (orcaTwoPosition >= 44 && orcaTwoPosition < 119) {
+      orcaTwoPosition += width
+    } else {
+      orcaTwoPosition = 38
+    }
+
+    if (!checkIfWall(orcaOnePosition)) addOrca(orcaOnePosition)
+    if (!checkIfWall(orcaTwoPosition)) addOrca(orcaTwoPosition)
+  }, 500) // orca in OFF mode
+  
+
+  // ? MOVE PAC-SHARK FUNCTION **********
+  function handleKeyDown(event) {
     removeShark(sharkPosition)
     removeFish(sharkPosition)
-
-    // const sharkX = sharkPosition % width
-    // const sharkY = Math.floor(sharkPosition / width)
-    // console.log('x =', sharkX, 'y =', sharkY)
-    // if (sharkX < 18)
-    // if (sharkX > 1)
-    // if (sharkY > 1) 
-    //  if (sharkY < 18) 
+    removeShell(sharkPosition)
 
     switch (event.keyCode) {
       case 39: //move right
@@ -187,21 +215,44 @@ function init() {
         console.log('Not a valid key!')
     }
     addShark(sharkPosition)
+    handleWin()
+    handleLose()
+  }
+  
+  // ? WINNER FUNCTION **********
+  function handleWin() {
+    const fishCells = cells.filter(cell => {
+      if (cell.classList.contains(fishClass) || (cell.classList.contains(shellClass))) {
+        return cell
+      }
+    })
+    if (fishCells.length === 0) {
+      window.alert('You won!!!!')
+    }
   }
 
-  addOrca(orcaPosition)
+  // ? LOSER FUNCTION **********
+  function handleLose() {
+    if (sharkPosition === orcaOnePosition 
+    || sharkPosition === orcaTwoPosition) {
+      window.alert('You lost!')
+    }
+  }
+
+  // ? RESET FUNCTION **********
+  function handleReset() {
+    window.location.reload()
+  }
 
 
+  // Event Listeners ************
+  // ! GAME PLAY PREVENTED IN THIS FUNCTION
+  function handleStart() {
+    document.addEventListener('keydown', handleKeyDown)
+  }
 
-
-  document.addEventListener('keydown', handleKeyUp)
-  
-  
-  // - create variable for tracking sharky's place on the grid
-  // - add an event listener to move with arrow keys around the board ('keydown')
-  // - update sharky's place and remove sharky from previous place with each move
-  
-
+  startBtn.addEventListener('click', handleStart)
+  playAgainBtn.addEventListener('click', handleReset)
 
 
 
