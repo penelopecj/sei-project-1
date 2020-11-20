@@ -28,6 +28,8 @@ function init() {
 
   // add wall and fish styling as borders and background images
 
+  //tim, elsie, dougal doing pac man
+
   cells.forEach(cell => {
     const coral = parseInt(cell.dataset.id)
     // horizontal walls
@@ -128,6 +130,7 @@ function init() {
 
   function handleKeyUp(event) {
     removeShark(sharkPosition)
+    removeFish(sharkPosition)
 
     switch(event.keyCode) {
       case 39: //move right
@@ -150,11 +153,15 @@ function init() {
   }
 
   function addShark(position) {
-    cells[position].classList.add('shark')
+    cells[position].classList.add(sharkClass)
   }
 
   function removeShark(position) {
-    cells[position].classList.remove('shark')
+    cells[position].classList.remove(sharkClass)
+  }
+
+  function removeFish(position) {
+    cells[position].classList.remove(fishClass)
   }
 
   document.addEventListener('keydown', handleKeyUp)
