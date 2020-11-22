@@ -15,7 +15,7 @@ function init() {
   const orcaClass = 'orca'
 
   let sharkPosition = 365
-  let orcaOnePosition = 20
+  let orcaOnePosition = 21
   let orcaTwoPosition = 38
 
   // make div in css
@@ -177,14 +177,14 @@ function init() {
       orcaOnePosition = 21
     }
     // orca2 path
-    if (orcaTwoPosition < 44) {
+    if (orcaTwoPosition > 32 && orcaTwoPosition <= 38) {
       orcaTwoPosition --
-    } else if (orcaTwoPosition > 98 && orcaTwoPosition <= 104) {
-      orcaTwoPosition ++
-    } else if (orcaTwoPosition >= 44 && orcaTwoPosition < 119) {
+    } else if (orcaTwoPosition === 32 || orcaTwoPosition === 52|| orcaTwoPosition === 72) {
       orcaTwoPosition += width
-    } else {
-      orcaTwoPosition = 38
+    } else if (orcaTwoPosition >= 92 && orcaTwoPosition < 98) {
+      orcaTwoPosition ++
+    } else if (orcaTwoPosition === 98 || orcaTwoPosition === 78  || orcaTwoPosition === 58) {
+      orcaTwoPosition -= width
     }
 
     if (!checkIfWall(orcaOnePosition)) addOrca(orcaOnePosition)
