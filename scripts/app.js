@@ -1,26 +1,25 @@
-// ! Glitch on cell 23 - thinks that player has lost even though no orca
-
 function init() {
+  // DOM objects
   const grid = document.querySelector('.grid')
   const startBtn = document.querySelector('#start')
   const playAgainBtn = document.querySelector('#play-again')
   const cells = []
 
+  // constant variables
   const width = 20
   const cellCount = width * width
   const fishClass = 'fish'
   const shellClass = 'shell'
   const wallClass = 'wall'
-  const sharkClass = 'shark'
   const orcaClass = 'orca'
 
+  // variables will change
+  let sharkClass = 'shark-e'
   let sharkPosition = 365
   let orcaOnePosition = 21
   let orcaTwoPosition = 38
 
-  // make div in css
-
-  // make grid using JS
+  // * loop to MAKE GRID
   for (let i = 0; i < cellCount; i++) {
     const cell = document.createElement('div')
     cell.dataset.id = i
@@ -28,12 +27,7 @@ function init() {
     cells.push(cell)
   }
 
-  // lightly style board
-
-  // make obvious what everything is with classes and semantic html tags
-
-  // add wall and fish styling as borders and background images
-  // ! VERY LONG WALL BUILDER LOOP
+  // ! very long WALL BUILDER loop
   cells.forEach(cell => {
     const cellId = parseInt(cell.dataset.id)
     // horizontal walls
@@ -132,13 +126,14 @@ function init() {
     }
   })
 
+
   // ? GAME PLAY FUNCTIONS *********
   function checkIfWall(position) {
     return cells[position].classList.contains(wallClass)
   }
 
-  function addShark(position) {
-    cells[position].classList.add(sharkClass)
+  function addShark(position, direction) {
+    cells[position].classList.add(direction)
   }
 
   function removeShark(position) {
@@ -161,8 +156,13 @@ function init() {
     cells[position].classList.remove(shellClass)
   }
 
+
   // ? MOVE ORCA FUNCTION **********
   setInterval(() => {
+    // check if player lost first
+    handleLose()
+
+    // now move orcas to next space
     removeOrca(orcaOnePosition)
     removeOrca(orcaTwoPosition)
 
@@ -189,63 +189,80 @@ function init() {
 
     if (!checkIfWall(orcaOnePosition)) addOrca(orcaOnePosition)
     if (!checkIfWall(orcaTwoPosition)) addOrca(orcaTwoPosition)
-  }, 500) // orca in OFF mode
+  }, 500) 
   
 
-  // ? MOVE PAC-SHARK FUNCTION **********
+  // ? MOVE PAC-SHARK function **********
   function handleKeyDown(event) {
     removeShark(sharkPosition)
     removeFish(sharkPosition)
     removeShell(sharkPosition)
 
     switch (event.keyCode) {
-      case 39: //move right
-        if (!checkIfWall(sharkPosition + 1)) sharkPosition ++ 
+      case 39: //move east
+        if (!checkIfWall(sharkPosition + 1)) {
+          sharkPosition ++
+          sharkClass = 'shark-e'
+        }
         break
-      case 37: // move left
-        if (!checkIfWall(sharkPosition - 1)) sharkPosition --   
+      case 37: // move west
+        if (!checkIfWall(sharkPosition - 1)) {
+          sharkPosition --   
+          sharkClass = 'shark-w'
+        }
         break
-      case 38: // move up
-        if (!checkIfWall(sharkPosition - width)) sharkPosition -= width
+      case 38: // move north
+        if (!checkIfWall(sharkPosition - width)) {
+          sharkPosition -= width
+          sharkClass = 'shark-n'
+        }
         break
-      case 40: //move down
-        if (!checkIfWall(sharkPosition + width)) sharkPosition += width
+      case 40: //move south
+        if (!checkIfWall(sharkPosition + width)) {
+          sharkPosition += width
+          sharkClass = 'shark-s'
+        }
         break
       default:
         console.log('Not a valid key!')
     }
-    addShark(sharkPosition)
-    handleWin()
+    // add Shark-Man at new location
+    addShark(sharkPosition, sharkClass)
+    
+    // check if player lost just now
     handleLose()
+
+    // check if player won just now
+    handleWin()
   }
   
-  // ? WINNER FUNCTION **********
+  // ? CHECK IF WON function **********
   function handleWin() {
     const fishCells = cells.filter(cell => {
       if (cell.classList.contains(fishClass) || (cell.classList.contains(shellClass))) {
         return cell
       }
     })
-    if (fishCells.length === 0) {
-      window.alert('You won!!!!')
+    if (fishCells.length <= 1) {
+      window.alert('You won!!!! 🏆')
     }
   }
 
-  // ? LOSER FUNCTION **********
+  // ? CHECK IF LOST function **********
   function handleLose() {
     if (sharkPosition === orcaOnePosition 
     || sharkPosition === orcaTwoPosition) {
-      window.alert('You lost!')
+      window.alert('You lost! 😭')
     }
   }
 
-  // ? RESET FUNCTION **********
+  // ? RESTART GAME function **********
   function handleReset() {
     window.location.reload()
   }
 
 
-  // Event Listeners ************
+  // * Event Listeners ************
   // ! GAME PLAY PREVENTED IN THIS FUNCTION
   function handleStart() {
     document.addEventListener('keydown', handleKeyDown)
