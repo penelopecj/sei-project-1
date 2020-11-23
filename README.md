@@ -10,7 +10,7 @@ by Penny Jungreis
 * Eat the clams, crustacea, tropical fish, and octopuses to get extra points.
 
 ## Game Features
-* Game will not start until user is ready to play.
+* Click start game or press any arrow key to add Pac-Shark to the grid.
 * Reset the game at any time to play again.
 * Pac-Shark can turn to face the direction it is swimming in.
 * Fish and clams disappear without a trace when eaten.

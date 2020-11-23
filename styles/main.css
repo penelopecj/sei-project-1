@@ -231,6 +231,27 @@ header p {
   background-image: url('../images/orca.jpg');
   background-repeat: no-repeat;
   background-size: contain;
+  animation: flip;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flip {
+  0% {
+    background-image: url('../images/orca.jpg');
+  }
+  47% {
+    background-image: url('../images/orca.jpg');
+  }
+  50% {
+    background-image: url('../images/orca-flip.jpg');
+  }
+  97% {
+    background-image: url('../images/orca-flip.jpg');
+  }
+  100% {
+    background-image: url('../images/orca.jpg');
+  }
 }
 
 /* OCTOPUS CLASS */

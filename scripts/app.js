@@ -366,17 +366,19 @@ function init() {
     scoreDisplay.innerHTML = totalScore
   }
 
-  // ? RESTART GAME function **********
+  // ? START GAME function **********
+  function handleStart() {
+    addShark(sharkPosition, sharkClass)
+  }
+
+  // ? RELOAD GAME function **********
   function handleReset() {
     window.location.reload()
   }
 
-  // * Event Listeners ************
-  // ! GAME PLAY PREVENTED IN THIS FUNCTION
-  function handleStart() {
-    document.addEventListener('keydown', handleKeyDown)
-  }
 
+  // * Event Listeners ************
+  document.addEventListener('keydown', handleKeyDown)
   startBtn.addEventListener('click', handleStart)
   playAgainBtn.addEventListener('click', handleReset)
 
