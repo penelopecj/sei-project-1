@@ -1,8 +1,18 @@
 function init() {
+  // * TO DO
+  // score + 50 every time a special creature is eaten
+  // html element for storing
+  // document get element
+  // inner html show score
+
+
+
+
   // DOM objects
   const grid = document.querySelector('.grid')
   const startBtn = document.querySelector('#start')
   const playAgainBtn = document.querySelector('#play-again')
+  const scoreDisplay = document.querySelector('.score')
   const cells = []
 
   // constant variables
@@ -18,6 +28,7 @@ function init() {
   let sharkPosition = 365
   let orcaOnePosition = 21
   let orcaTwoPosition = 38
+  let totalScore = 0
 
   // * loop to MAKE GRID
   for (let i = 0; i < cellCount; i++) {
@@ -169,24 +180,33 @@ function init() {
     // orca1 path
     if (orcaOnePosition < 27) {
       orcaOnePosition ++
-    } else if (orcaOnePosition > 81 && orcaOnePosition <= 87) {
+    } else if (orcaOnePosition > 81 
+      && orcaOnePosition <= 87) {
       orcaOnePosition --
-    } else if (orcaOnePosition >= 27 && orcaOnePosition < 102) {
+    } else if (orcaOnePosition >= 27 
+      && orcaOnePosition < 102) {
       orcaOnePosition += width
     } else {
       orcaOnePosition = 21
     }
     // orca2 path
-    if (orcaTwoPosition > 32 && orcaTwoPosition <= 38) {
+    if (orcaTwoPosition > 32 
+      && orcaTwoPosition <= 38) {
       orcaTwoPosition --
-    } else if (orcaTwoPosition === 32 || orcaTwoPosition === 52|| orcaTwoPosition === 72) {
+    } else if (orcaTwoPosition === 32 
+      || orcaTwoPosition === 52
+      || orcaTwoPosition === 72) {
       orcaTwoPosition += width
-    } else if (orcaTwoPosition >= 92 && orcaTwoPosition < 98) {
+    } else if (orcaTwoPosition >= 92 
+      && orcaTwoPosition < 98) {
       orcaTwoPosition ++
-    } else if (orcaTwoPosition === 98 || orcaTwoPosition === 78  || orcaTwoPosition === 58) {
+    } else if (orcaTwoPosition === 98 
+      || orcaTwoPosition === 78  
+      || orcaTwoPosition === 58) {
       orcaTwoPosition -= width
     }
 
+    // check if wall is not needed, it's there just in case
     if (!checkIfWall(orcaOnePosition)) addOrca(orcaOnePosition)
     if (!checkIfWall(orcaTwoPosition)) addOrca(orcaTwoPosition)
   }, 500) 
@@ -229,6 +249,9 @@ function init() {
     // add Shark-Man at new location
     addShark(sharkPosition, sharkClass)
     
+    // expect to pop up with the current score
+    addPoints()
+
     // check if player lost just now
     handleLose()
 
@@ -239,11 +262,12 @@ function init() {
   // ? CHECK IF WON function **********
   function handleWin() {
     const fishCells = cells.filter(cell => {
-      if (cell.classList.contains(fishClass) || (cell.classList.contains(shellClass))) {
+      if (cell.classList.contains(fishClass) 
+      || (cell.classList.contains(shellClass))) {
         return cell
       }
     })
-    if (fishCells.length <= 1) {
+    if (fishCells.length < 1) {
       window.alert('You won!!!! 🏆')
     }
   }
@@ -256,11 +280,21 @@ function init() {
     }
   }
 
+  // ? SCORING function **********
+  function addPoints() {
+    const sharkClassList = cells[sharkPosition].classList
+    if (sharkClassList.contains(fishClass)) {
+      totalScore += 20
+    } else if (sharkClassList.contains(shellClass)){
+      totalScore += 50
+    }
+    scoreDisplay.innerHTML = totalScore
+  }
+
   // ? RESTART GAME function **********
   function handleReset() {
     window.location.reload()
   }
-
 
   // * Event Listeners ************
   // ! GAME PLAY PREVENTED IN THIS FUNCTION
