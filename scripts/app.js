@@ -1,10 +1,6 @@
 function init() {
   // * TO DO
-  // score + 50 every time a special creature is eaten
-  // html element for storing
-  // document get element
-  // inner html show score
-
+  // when pac shark eats clam, orca classes change to octopus classes
 
 
 
@@ -22,6 +18,7 @@ function init() {
   const shellClass = 'shell'
   const wallClass = 'wall'
   const orcaClass = 'orca'
+  const octoClass = 'octopus'
 
   // variables will change
   let sharkClass = 'shark-e'
@@ -159,6 +156,14 @@ function init() {
 
   function removeOrca(position) {
     cells[position].classList.remove(orcaClass)
+  }
+
+  function addOcto(position) {
+    cells[position].classList.add(octoClass)
+  }
+
+  function removeOcto(position) {
+    cells[position].classList.remove(octoClass)
   }
 
   function removeFish(position) {

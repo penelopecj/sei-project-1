@@ -28,6 +28,7 @@ header h1 {
 header p {
   margin-top: 0;
   color: rgb(0, 94, 255);
+  font-style: italic;
 }
 
 .menu {
@@ -144,6 +145,13 @@ header p {
 /* ORCA CLASS */
 .grid div.orca {
   background-image: url('../images/orca.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* OCTOPUS CLASS */
+.grid div.octopus {
+  background-image: url('../images/octopus.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
