@@ -23,7 +23,10 @@ header {
 header h1 {
   color: navy;
   margin-bottom: 0.3rem;
-}
+  /* font-family: 'Londrina Shadow', cursive; */
+  /* font-family: 'Nerko One', cursive; */
+  font-family: 'Galindo', cursive;
+} 
 
 header p {
   margin-top: 0;
@@ -38,6 +41,7 @@ header p {
 }
 
 .menu button {
+  font-family: ;
   color: white;
   font-size: 1.3rem;
   margin: 0 1rem;
@@ -53,6 +57,7 @@ header p {
 }
 
 .score-wrapper {
+  font-family: 'Galindo', cursive;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,8 +70,12 @@ header p {
   border: 1px solid rgb(0, 128, 128);
 }
 
-.score-wrapper p, .score {
+.score-wrapper p {
   margin: 0.5rem;
+}
+
+.score {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .grid-wrapper {
@@ -119,6 +128,9 @@ header p {
   background-image: url('../images/shark-e.png');
   background-repeat: no-repeat;
   background-size: contain;
+  animation: chomp-e;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
 }
 
 /* PAC-SHARK WEST-FACING */
@@ -126,6 +138,9 @@ header p {
   background-image: url('../images/shark-w.png');
   background-repeat: no-repeat;
   background-size: contain;
+  animation: chomp-w;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
 }
 
 /* PAC-SHARK NORTH-FACING */
@@ -133,6 +148,9 @@ header p {
   background-image: url('../images/shark-n.png');
   background-repeat: no-repeat;
   background-size: contain;
+  animation: chomp-n;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
 }
 
 /* PAC-SHARK SOUTH-FACING */
@@ -140,6 +158,57 @@ header p {
   background-image: url('../images/shark-s.png');
   background-repeat: no-repeat;
   background-size: contain;
+  animation: chomp-s;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes chomp-e {
+  0% {
+    background-image: url('../images/shark-e.png');
+  }
+  50% {
+    background-image: url('../images/shark-e-chomp.png');
+  }
+  100% {
+    background-image: url('../images/shark-e.png');
+  }
+}
+
+@keyframes chomp-w {
+  0% {
+    background-image: url('../images/shark-w.png');
+  }
+  50% {
+    background-image: url('../images/shark-w-chomp.png');
+  }
+  100% {
+    background-image: url('../images/shark-w.png');
+  }
+}
+
+@keyframes chomp-n {
+  0% {
+    background-image: url('../images/shark-n.png');
+  }
+  50% {
+    background-image: url('../images/shark-n-chomp.png');
+  }
+  100% {
+    background-image: url('../images/shark-n.png');
+  }
+}
+
+@keyframes chomp-s {
+  0% {
+    background-image: url('../images/shark-s.png');
+  }
+  50% {
+    background-image: url('../images/shark-s-chomp.png');
+  }
+  100% {
+    background-image: url('../images/shark-s.png');
+  }
 }
 
 /* ORCA CLASS */
