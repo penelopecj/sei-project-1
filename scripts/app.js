@@ -17,12 +17,11 @@ function init() {
   const fishClass = 'fish'
   const shellClass = 'shell'
   const wallClass = 'wall'
-  const orcaClass = 'orca'
-  const octoClass = 'octopus'
 
   // variables will change
   let sharkClass = 'shark-e'
   let sharkPosition = 365
+  let orcaClass = 'orca'
   let orcaOnePosition = 21
   let orcaTwoPosition = 38
   let orcaThreePosition = 338
@@ -158,13 +157,20 @@ function init() {
     cells[position].classList.remove(orcaClass)
   }
 
-  function addOcto(position) {
-    cells[position].classList.add(octoClass)
+  function becomeOcto() {
+    if (cells[sharkPosition].classList.contains(shellClass)) {
+      removeOrca(orcaOnePosition)
+      removeOrca(orcaTwoPosition)
+      removeOrca(orcaThreePosition)
+      removeOrca(orcaFourPosition)
+      orcaClass = 'octopus'
+    }
   }
 
-  function removeOcto(position) {
-    cells[position].classList.remove(octoClass)
-  }
+  // function becomeOrca(position) {
+  //   removeOrca(position)
+  //   cells[position].classList.remove(octoClass)
+  // }
 
   function removeFish(position) {
     cells[position].classList.remove(fishClass)
@@ -297,6 +303,9 @@ function init() {
 
     // check if player won just now
     handleWin()
+
+    // change all killer whales to octopuses
+    becomeOcto()
   }
   
   // ? CHECK IF WON function **********
