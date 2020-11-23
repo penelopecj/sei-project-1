@@ -182,7 +182,7 @@ function init() {
 
 
   // ? MOVE ORCA FUNCTION **********
-  setInterval(() => {
+  const orcaTimer = setInterval(() => {
     // check if player lost first
     handleCollide()
 
@@ -323,12 +323,32 @@ function init() {
 
   // ? CHECK IF LOST function **********
   function handleCollide() {
-    if (sharkPosition === orcaOnePosition 
-    || sharkPosition === orcaTwoPosition
-    || sharkPosition === orcaThreePosition
-    || sharkPosition === orcaFourPosition) {
+    if (sharkPosition === orcaOnePosition) {
       if (orcaClass === 'octopus') {
-        window.alert('Yummy octopus!')
+        removeOrca(orcaOnePosition)
+        totalScore += 150
+        // clearInterval(orcaTimer)
+      } else {
+        window.alert('You lost! 😭')
+      }  
+    } else if (sharkPosition === orcaTwoPosition) {
+      if (orcaClass === 'octopus') {
+        removeOrca(orcaTwoPosition)
+        totalScore += 150
+      } else {
+        window.alert('You lost! 😭')
+      }  
+    } else if (sharkPosition === orcaThreePosition) {
+      if (orcaClass === 'octopus') {
+        removeOrca(orcaThreePosition)
+        totalScore += 150
+      } else {
+        window.alert('You lost! 😭')
+      }  
+    } else if (sharkPosition === orcaFourPosition) {
+      if (orcaClass === 'octopus') {
+        removeOrca(orcaFourPosition)
+        totalScore += 150
       } else {
         window.alert('You lost! 😭')
       }  
