@@ -184,7 +184,7 @@ function init() {
   // ? MOVE ORCA FUNCTION **********
   setInterval(() => {
     // check if player lost first
-    handleLose()
+    handleCollide()
 
     // now move orcas to next space
     removeOrca(orcaOnePosition)
@@ -299,7 +299,7 @@ function init() {
     addPoints()
 
     // check if player lost just now
-    handleLose()
+    handleCollide()
 
     // check if player won just now
     handleWin()
@@ -322,12 +322,16 @@ function init() {
   }
 
   // ? CHECK IF LOST function **********
-  function handleLose() {
+  function handleCollide() {
     if (sharkPosition === orcaOnePosition 
     || sharkPosition === orcaTwoPosition
     || sharkPosition === orcaThreePosition
     || sharkPosition === orcaFourPosition) {
-      window.alert('You lost! 😭')
+      if (orcaClass === 'octopus') {
+        window.alert('Yummy octopus!')
+      } else {
+        window.alert('You lost! 😭')
+      }  
     }
   }
 

@@ -114,7 +114,22 @@ header p {
   background-image: url('../images/shell.png');
   background-repeat: no-repeat;
   background-size: contain;
+  /* animation: flash;
+  animation-duration: 0.3s;
+  animation-iteration-count: infinite; */
 }
+
+/* @keyframes flash {
+  0% {
+    background-image: url('../images/shell.png');
+  }
+  50% {
+    background-image: none;
+  }
+  100% {
+    background-image: url('../images/shell.png');
+  }
+} */
 
 /* WALL CLASS */
 .grid div.wall {
@@ -223,6 +238,27 @@ header p {
   background-image: url('../images/octopus.png');
   background-repeat: no-repeat;
   background-size: contain;
+  animation: flare;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flare {
+  0% {
+    background-image: url('../images/octopus.png');
+  }
+  25% {
+    background-image: url('../images/octopus-style.png');
+  }
+  50% {
+    background-image: url('../images/octopus-flare.png');
+  }
+  75% {
+    background-image: url('../images/octopus-style.png');
+  }
+  100% {
+    background-image: url('../images/octopus.png');
+  }
 }
 
 footer {
