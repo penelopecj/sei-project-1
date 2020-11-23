@@ -28,6 +28,8 @@ function init() {
   let sharkPosition = 365
   let orcaOnePosition = 21
   let orcaTwoPosition = 38
+  let orcaThreePosition = 338
+  let orcaFourPosition = 321
   let totalScore = 0
 
   // * loop to MAKE GRID
@@ -176,6 +178,8 @@ function init() {
     // now move orcas to next space
     removeOrca(orcaOnePosition)
     removeOrca(orcaTwoPosition)
+    removeOrca(orcaThreePosition)
+    removeOrca(orcaFourPosition)
 
     // orca1 path
     if (orcaOnePosition < 27) {
@@ -183,11 +187,12 @@ function init() {
     } else if (orcaOnePosition > 81 
       && orcaOnePosition <= 87) {
       orcaOnePosition --
-    } else if (orcaOnePosition >= 27 
-      && orcaOnePosition < 102) {
+    } else if (orcaOnePosition === 27 
+      || orcaOnePosition === 47
+      || orcaOnePosition === 67) {
       orcaOnePosition += width
     } else {
-      orcaOnePosition = 21
+      orcaOnePosition -= width
     }
     // orca2 path
     if (orcaTwoPosition > 32 
@@ -200,15 +205,45 @@ function init() {
     } else if (orcaTwoPosition >= 92 
       && orcaTwoPosition < 98) {
       orcaTwoPosition ++
-    } else if (orcaTwoPosition === 98 
-      || orcaTwoPosition === 78  
-      || orcaTwoPosition === 58) {
+    } else {
       orcaTwoPosition -= width
+    }
+    // orca3 path
+    if (orcaThreePosition > 333 
+      && orcaThreePosition <= 338) {
+      orcaThreePosition --
+    } else if (orcaThreePosition === 333 
+      || orcaThreePosition === 313
+      || orcaThreePosition === 293
+      || orcaThreePosition === 273) {
+      orcaThreePosition -= width
+    } else if (orcaThreePosition >= 253 
+      && orcaThreePosition < 258) {
+      orcaThreePosition ++
+    } else {
+      orcaThreePosition += width
+    }
+    // orca4 path
+    if (orcaFourPosition > 320 
+      && orcaFourPosition < 326) {
+      orcaFourPosition ++
+    } else if (orcaFourPosition === 326 
+      || orcaFourPosition === 306
+      || orcaFourPosition === 286
+      || orcaFourPosition === 266) {
+      orcaFourPosition -= width
+    } else if (orcaFourPosition > 241 
+      && orcaFourPosition <= 246) {
+      orcaFourPosition --
+    } else {
+      orcaFourPosition += width
     }
 
     // check if wall is not needed, it's there just in case
     if (!checkIfWall(orcaOnePosition)) addOrca(orcaOnePosition)
     if (!checkIfWall(orcaTwoPosition)) addOrca(orcaTwoPosition)
+    if (!checkIfWall(orcaThreePosition)) addOrca(orcaThreePosition)
+    if (!checkIfWall(orcaFourPosition)) addOrca(orcaFourPosition)
   }, 500) 
   
 
@@ -275,7 +310,9 @@ function init() {
   // ? CHECK IF LOST function **********
   function handleLose() {
     if (sharkPosition === orcaOnePosition 
-    || sharkPosition === orcaTwoPosition) {
+    || sharkPosition === orcaTwoPosition
+    || sharkPosition === orcaThreePosition
+    || sharkPosition === orcaFourPosition) {
       window.alert('You lost! 😭')
     }
   }
