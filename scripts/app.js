@@ -1,6 +1,10 @@
 function init() {
   // * TO DO
-  
+  // octopuses disappear when sharkposition === octopus position
+  // 150 points for eating an octopus
+  // pause interval so orcapuses STOP re-appearing after a hot sec (15 seconds)
+  // add an if statement inside of the interval to suggest when the interval function should not be happening eg after pac shark eats this octopus
+  // orcapuses come back with 'orca' class
 
 
 
@@ -181,81 +185,152 @@ function init() {
   }
 
 
-  // ? MOVE ORCA FUNCTION **********
-  const orcaTimer = setInterval(() => {
-    // check if player lost first
-    handleCollide()
+  // *  Place orcas on the grid ********
+  addOrca(orcaOnePosition)
+  addOrca(orcaTwoPosition)
+  addOrca(orcaThreePosition)
+  addOrca(orcaFourPosition)
 
-    // now move orcas to next space
-    removeOrca(orcaOnePosition)
-    removeOrca(orcaTwoPosition)
-    removeOrca(orcaThreePosition)
-    removeOrca(orcaFourPosition)
+  moveOrcaOne()
+  moveOrcaTwo()
+  moveOrcaThree()
+  moveOrcaFour()
 
-    // orca1 path
-    if (orcaOnePosition < 27) {
-      orcaOnePosition ++
-    } else if (orcaOnePosition > 81 
-      && orcaOnePosition <= 87) {
-      orcaOnePosition --
-    } else if (orcaOnePosition === 27 
-      || orcaOnePosition === 47
-      || orcaOnePosition === 67) {
-      orcaOnePosition += width
-    } else {
-      orcaOnePosition -= width
-    }
-    // orca2 path
-    if (orcaTwoPosition > 32 
-      && orcaTwoPosition <= 38) {
-      orcaTwoPosition --
-    } else if (orcaTwoPosition === 32 
-      || orcaTwoPosition === 52
-      || orcaTwoPosition === 72) {
-      orcaTwoPosition += width
-    } else if (orcaTwoPosition >= 92 
-      && orcaTwoPosition < 98) {
-      orcaTwoPosition ++
-    } else {
-      orcaTwoPosition -= width
-    }
-    // orca3 path
-    if (orcaThreePosition > 333 
-      && orcaThreePosition <= 338) {
-      orcaThreePosition --
-    } else if (orcaThreePosition === 333 
-      || orcaThreePosition === 313
-      || orcaThreePosition === 293
-      || orcaThreePosition === 273) {
-      orcaThreePosition -= width
-    } else if (orcaThreePosition >= 253 
-      && orcaThreePosition < 258) {
-      orcaThreePosition ++
-    } else {
-      orcaThreePosition += width
-    }
-    // orca4 path
-    if (orcaFourPosition > 320 
-      && orcaFourPosition < 326) {
-      orcaFourPosition ++
-    } else if (orcaFourPosition === 326 
-      || orcaFourPosition === 306
-      || orcaFourPosition === 286
-      || orcaFourPosition === 266) {
-      orcaFourPosition -= width
-    } else if (orcaFourPosition > 241 
-      && orcaFourPosition <= 246) {
-      orcaFourPosition --
-    } else {
-      orcaFourPosition += width
-    }
+  // ? MOVE ORCA 1 FUNCTION **********
+  function moveOrcaOne(timer) {
+    // set class back to orca
+    // orcaClass = 'orca'
+    const orcaOneDelay = setTimeout( () => {
+      const orcaOneTimer = setInterval(() => {
+        // check if player lost first
+        handleCollide()
+        
+        // now remove orca from previous space
+        removeOrca(orcaOnePosition)
 
-    // check if wall is not needed, it's there just in case
-    if (!checkIfWall(orcaOnePosition)) addOrca(orcaOnePosition)
-    if (!checkIfWall(orcaTwoPosition)) addOrca(orcaTwoPosition)
-    if (!checkIfWall(orcaThreePosition)) addOrca(orcaThreePosition)
-    if (!checkIfWall(orcaFourPosition)) addOrca(orcaFourPosition)
-  }, 500) 
+        clearInterval(timer)
+    
+        // orca1 path
+        if (orcaOnePosition < 27) {
+          orcaOnePosition ++
+        } else if (orcaOnePosition > 81 
+          && orcaOnePosition <= 87) {
+          orcaOnePosition --
+        } else if (orcaOnePosition === 27 
+          || orcaOnePosition === 47
+          || orcaOnePosition === 67) {
+          orcaOnePosition += width
+        } else {
+          orcaOnePosition -= width
+        }
+    
+        // if (!checkIfWall(orcaOnePosition)) 
+
+        // add orca to new space
+        addOrca(orcaOnePosition)
+      }, 500) 
+    }, 5000)
+  }
+  
+  
+  // ? MOVE ORCA 2 FUNCTION **********
+  function moveOrcaTwo(timer) {
+    // orcaClass = 'orca'
+    const orcaTwoDelay = setTimeout( () => {
+      const orcaTwoTimer = setInterval(() => {
+        handleCollide()
+  
+        removeOrca(orcaTwoPosition)
+
+        clearInterval(timer)
+    
+        // orca2 path
+        if (orcaTwoPosition > 32 
+          && orcaTwoPosition <= 38) {
+          orcaTwoPosition --
+        } else if (orcaTwoPosition === 32 
+          || orcaTwoPosition === 52
+          || orcaTwoPosition === 72) {
+          orcaTwoPosition += width
+        } else if (orcaTwoPosition >= 92 
+          && orcaTwoPosition < 98) {
+          orcaTwoPosition ++
+        } else {
+          orcaTwoPosition -= width
+        }
+      
+        // if (!checkIfWall(orcaTwoPosition)) 
+        addOrca(orcaTwoPosition)
+      }, 500) 
+    }, 5000)
+  }
+
+
+  // ? MOVE ORCA 3 FUNCTION **********
+  function moveOrcaThree(timer) {
+    // orcaClass = 'orca'
+    const orcaThreeDelay = setTimeout( () => {
+      const orcaThreeTimer = setInterval(() => {
+        handleCollide()
+    
+        removeOrca(orcaThreePosition)
+
+        clearInterval(timer)
+  
+        // orca3 path
+        if (orcaThreePosition > 333 
+          && orcaThreePosition <= 338) {
+          orcaThreePosition --
+        } else if (orcaThreePosition === 333 
+          || orcaThreePosition === 313
+          || orcaThreePosition === 293
+          || orcaThreePosition === 273) {
+          orcaThreePosition -= width
+        } else if (orcaThreePosition >= 253 
+          && orcaThreePosition < 258) {
+          orcaThreePosition ++
+        } else {
+          orcaThreePosition += width
+        }
+  
+        // if (!checkIfWall(orcaThreePosition)) 
+        addOrca(orcaThreePosition)
+      }, 500) 
+    }, 5000)
+  }
+  
+
+  // ? MOVE ORCA 4 FUNCTION **********
+  function moveOrcaFour(timer) {
+    // orcaClass = 'orca'
+    const orcaFourDelay = setTimeout( () => {
+      const orcaFourTimer = setInterval(() => {
+        handleCollide()
+
+        removeOrca(orcaFourPosition)
+
+        clearInterval(timer)
+  
+        if (orcaFourPosition > 320 
+          && orcaFourPosition < 326) {
+          orcaFourPosition ++
+        } else if (orcaFourPosition === 326 
+          || orcaFourPosition === 306
+          || orcaFourPosition === 286
+          || orcaFourPosition === 266) {
+          orcaFourPosition -= width
+        } else if (orcaFourPosition > 241 
+          && orcaFourPosition <= 246) {
+          orcaFourPosition --
+        } else {
+          orcaFourPosition += width
+        }
+  
+        // if (!checkIfWall(orcaFourPosition)) 
+        addOrca(orcaFourPosition)
+      }, 500) 
+    }, 5000)
+  }
   
 
   // ? MOVE PAC-SHARK function **********
@@ -321,13 +396,13 @@ function init() {
     }
   }
 
-  // ? CHECK IF LOST function **********
+  // ? PAC-SHARK COLLISION function **********
   function handleCollide() {
     if (sharkPosition === orcaOnePosition) {
       if (orcaClass === 'octopus') {
         removeOrca(orcaOnePosition)
         totalScore += 150
-        // clearInterval(orcaTimer)
+        clearInterval(orcaOneTimer)
       } else {
         window.alert('You lost! 😭')
       }  
@@ -335,6 +410,8 @@ function init() {
       if (orcaClass === 'octopus') {
         removeOrca(orcaTwoPosition)
         totalScore += 150
+        clearInterval(orcaTwoTimer)
+        // placeOrcaTwo()
       } else {
         window.alert('You lost! 😭')
       }  
@@ -342,6 +419,7 @@ function init() {
       if (orcaClass === 'octopus') {
         removeOrca(orcaThreePosition)
         totalScore += 150
+        clearInterval(orcaThreeTimer)
       } else {
         window.alert('You lost! 😭')
       }  
@@ -349,6 +427,7 @@ function init() {
       if (orcaClass === 'octopus') {
         removeOrca(orcaFourPosition)
         totalScore += 150
+        clearInterval(orcaFourTimer)
       } else {
         window.alert('You lost! 😭')
       }  
