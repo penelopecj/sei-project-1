@@ -8,6 +8,7 @@ by Penny Jungreis
 * Make sure to avoid the killer whales - they eat sharks!!
 * Eat all of the fish to win the game.
 * Eat the clams, crustacea, tropical fish, and octopuses to get extra points.
+* Make sure to chew the octopuses thorughly as they are quite hardy.
 
 ## Game Features
 * Click start game or press any arrow key to add Pac-Shark to the grid.
