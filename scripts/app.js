@@ -311,7 +311,7 @@ function init() {
       orcas[2].position += width
     }
 
-    // addOrca()
+    addOrca()
   }
 
   let orcaThreeTimer = setInterval(() => {
@@ -321,14 +321,16 @@ function init() {
       clearInterval(orcaThreeTimer)
       setTimeout(() => {
         // orcas[2].position = 338
+        removeOrca()
         orcas[2].background = 'orca'
-        cells[orcas[2].position].classList.remove('octopus')
+        addOrca()
         orcaThreeTimer = setInterval(() => {
           handleCollide()
-          
+
           if (orcas[2].position === sharkPosition) {
             clearInterval(orcaThreeTimer)
           }
+          moveOrcaThree()
         }, 500)
       }, 7000)  
     }
@@ -452,11 +454,10 @@ function init() {
     orcas.forEach(orca => {
       if (sharkPosition === orca.position) {
         if (orca.background === 'octopus') {
-          removeOrca(orca.position)
-          cells[orca.position].classList.remove('octopus')
+          removeOrca()
           totalScore += 150
         } else {
-          // window.alert('You lost! 😭')
+          window.alert('You lost! 😭')
           console.log('You lost! 😭')
         }  
       }
