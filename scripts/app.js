@@ -4,10 +4,7 @@ function init() {
   // make separate variables and timers for the octopuses = NO CLASSES
   // or make a become orca function?
   // or Jos suugestion make seperate objects in an orca array for each orca.
-  // each orca has a separate background class that can be maniulate one at a  time.
-  // try commenting out and rewriting just this part
-  // Copy and paste the code as it is into a new file
-  // create an array of orca objects to store all of their info do this
+
 
 
 
@@ -44,13 +41,13 @@ function init() {
       index: 3,
       position: 321,
       background: 'orca',
-    },
+    }
   ]
 
   // variables will change
   let sharkClass = 'shark-e'
   let sharkPosition = 365
-  let orcaClass = 'orca'
+  // let orcaClass = 'orca'
   let totalScore = 0
 
   // * loop to MAKE GRID
@@ -61,7 +58,7 @@ function init() {
     cells.push(cell)
   }
 
-  // ! very long WALL BUILDER loop
+  // * very long WALL BUILDER loop
   cells.forEach(cell => {
     const cellId = parseInt(cell.dataset.id)
     // horizontal walls
@@ -174,15 +171,15 @@ function init() {
     cells[position].classList.remove(sharkClass)
   }
 
-  function addOrca(position) {
+  function addOrca() {
     orcas.forEach(orca => {
-      cells[position].classList.add(orca.background)
+      cells[orca.position].classList.add(orca.background)
     })
   }
 
-  function removeOrca(position) {
+  function removeOrca() {
     orcas.forEach(orca => {
-      cells[position].classList.remove(orca.background)
+      cells[orca.position].classList.remove(orca.background)
     })
     
   }
@@ -201,18 +198,18 @@ function init() {
 
     }
   }
-
-  function becomeOrca() {
+  function becomeOrca(position) {
     // removeOrca(orcas[0].position)
     // removeOrca(orcas[1].position)
     // removeOrca(orcas[2].position)
     // removeOrca(orcas[3].position)
     // orcaClass = 'orca'
-    orcas.forEach(orca => {
-      removeOrca(orca.position)
-      orca.background = 'orca'
+    orcas.filter(orca => {
+      if (orca.position === position) {
+        orca.background = 'orca'
+        console.log(orca)
+      }
     })
-
   }
 
   function removeFish(position) {
@@ -229,10 +226,6 @@ function init() {
     addOrca(orca.position)
   })
 
-  moveOrcaOne()
-  moveOrcaTwo()
-  moveOrcaThree()
-  moveOrcaFour()
 
   // ? MOVE ORCA 1 FUNCTION **********
   function moveOrcaOne() {
@@ -301,7 +294,7 @@ function init() {
 
   // ? MOVE ORCA 3 FUNCTION **********
   function moveOrcaThree() {
-    removeOrca(orcas[2].position)
+    removeOrca()
 
     if (orcas[2].position > 333 
       && orcas[2].position <= 338) {
@@ -318,7 +311,7 @@ function init() {
       orcas[2].position += width
     }
 
-    addOrca(orcas[2].position)
+    // addOrca()
   }
 
   let orcaThreeTimer = setInterval(() => {
@@ -327,9 +320,9 @@ function init() {
     if (orcas[2].position === sharkPosition) {
       clearInterval(orcaThreeTimer)
       setTimeout(() => {
-        orcas[2].position = 338
-        becomeOrca(orcas[2].position)
-        addOrca(orcas[2].position)
+        // orcas[2].position = 338
+        orcas[2].background = 'orca'
+        cells[orcas[2].position].classList.remove('octopus')
         orcaThreeTimer = setInterval(() => {
           handleCollide()
           
@@ -460,9 +453,11 @@ function init() {
       if (sharkPosition === orca.position) {
         if (orca.background === 'octopus') {
           removeOrca(orca.position)
+          cells[orca.position].classList.remove('octopus')
           totalScore += 150
         } else {
-          window.alert('You lost! 😭')
+          // window.alert('You lost! 😭')
+          console.log('You lost! 😭')
         }  
       }
     })
