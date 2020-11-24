@@ -20,3 +20,9 @@ by Penny Jungreis
 * No need to worry about getting stock in any coral reefs. It is not possible for Pac-Shark to swim over them.
 * You will know right away if you have won or lost because the sounds of the ocean will tell you...
 * See how many points you get for eating different sea creatures on the score display.
+
+## Challenges Overcome
+* How to prevent Pac-Shark from swimming over walls by using a class for all wall cells.
+* How to animate the background images.
+* How to seamlessly change the orcas to octopuses when a clam is eaten.
+* How to make the octopuses disappear when eaten and come back as killer whales.

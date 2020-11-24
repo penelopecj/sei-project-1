@@ -1,6 +1,6 @@
 function init() {
   // * TO DO
-  // when pac shark eats clam, orca classes change to octopus classes
+  
 
 
 
