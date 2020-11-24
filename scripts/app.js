@@ -1,9 +1,5 @@
 function init() {
   // * TO DO
-  // octopuses disappear when sharkposition === octopus position
-  // 150 points for eating an octopus
-  // pause interval so orcapuses STOP re-appearing after a hot sec (15 seconds)
-  // add an if statement inside of the interval to suggest when the interval function should not be happening eg after pac shark eats this octopus
   // orcapuses come back with 'orca' class
 
 
@@ -184,6 +180,18 @@ function init() {
     cells[position].classList.remove(shellClass)
   }
 
+  // make separate variables and timers for the octopuses = NO CLASSES
+
+  // or make a become orca function?
+
+  // or Jos suugestion make seperate objects in an orca array for each orca.
+  // each orca has a separate background class that can be maniulate one at a  time.
+
+  // try commenting out and rewriting just this part
+
+  // Copy and paste the code as it is into a new file
+
+  // create an array of orca objects to store all of their info do this
 
   // *  Place orcas on the grid ********
   addOrca(orcaOnePosition)
@@ -197,7 +205,7 @@ function init() {
   moveOrcaFour()
 
   // ? MOVE ORCA 1 FUNCTION **********
-  function moveOrcaOne(timer) {
+  function moveOrcaOne() {
     // set class back to orca
     // orcaClass = 'orca'
     //const orcaOneDelay = setTimeout( () => {
@@ -235,7 +243,7 @@ function init() {
   
   
   // ? MOVE ORCA 2 FUNCTION **********
-  function moveOrcaTwo(timer) {
+  function moveOrcaTwo() {
     // orcaClass = 'orca'
     // const orcaTwoDelay = setTimeout( () => {
     const orcaTwoTimer = setInterval(() => {
@@ -265,16 +273,18 @@ function init() {
       // if (!checkIfWall(orcaTwoPosition)) 
       addOrca(orcaTwoPosition)
     }, 500) 
-   // }, 0)
+  // }, 0)
   }
 
 
   // ? MOVE ORCA 3 FUNCTION **********
-  function moveOrcaThree(timer) {
+  function moveOrcaThree() {
     // orcaClass = 'orca'
     //const orcaThreeDelay = setTimeout(() => {
     const orcaThreeTimer = setInterval(() => {
       handleCollide()
+
+      console.log(typeof orcaThreeTimer)
       
       if (orcaThreePosition === sharkPosition) {
         clearInterval(orcaThreeTimer)
@@ -306,7 +316,7 @@ function init() {
   
 
   // ? MOVE ORCA 4 FUNCTION **********
-  function moveOrcaFour(timer) {
+  function moveOrcaFour() {
     // orcaClass = 'orca'
     //const orcaFourDelay = setTimeout( () => {
     const orcaFourTimer = setInterval(() => {
@@ -314,6 +324,7 @@ function init() {
 
       if (orcaFourPosition === sharkPosition) {
         clearInterval(orcaFourTimer)
+        moveOrcaFourAgain()
       }
 
       removeOrca(orcaFourPosition)
@@ -339,6 +350,40 @@ function init() {
     //}, 0)
   }
   
+
+  // ? MOVE ORCA 4 _AGAIN_ FUNCTION **********
+  function moveOrcaFourAgain() {
+    setTimeout(() => {
+      orcaFourPosition = 321
+      // orcaClass = 'orca'
+      addOrca(orcaFourPosition)
+      const orcaFourTimer = setInterval(() => {
+        handleCollide()
+        
+        if (orcaFourPosition === sharkPosition) {
+          clearInterval(orcaFourTimer)
+        }
+        removeOrca(orcaFourPosition)
+
+        if (orcaFourPosition > 320 
+          && orcaFourPosition < 326) {
+          orcaFourPosition ++
+        } else if (orcaFourPosition === 326 
+          || orcaFourPosition === 306
+          || orcaFourPosition === 286
+          || orcaFourPosition === 266) {
+          orcaFourPosition -= width
+        } else if (orcaFourPosition > 241 
+          && orcaFourPosition <= 246) {
+          orcaFourPosition --
+        } else {
+          orcaFourPosition += width
+        }
+
+        addOrca(orcaFourPosition)
+      }, 500) 
+    }, 7000)
+  }
 
   // ? MOVE PAC-SHARK function **********
   function handleKeyDown(event) {
@@ -416,7 +461,6 @@ function init() {
       if (orcaClass === 'octopus') {
         removeOrca(orcaTwoPosition)
         totalScore += 150
-        // placeOrcaTwo()
       } else {
         window.alert('You lost! 😭')
       }  
