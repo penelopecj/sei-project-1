@@ -94,7 +94,10 @@ header p {
   justify-content: center;
   height: 600px; 
   width: 600px; 
-  font-size: 0.8rem;
+  font-size: 2rem;
+  font-family: 'Galindo', cursive;
+  color: white;
+  background-color: lightskyblue;
 }
 
 .grid div {

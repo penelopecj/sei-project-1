@@ -19,7 +19,7 @@ by Penny Jungreis
 * Killer whales have an odd habit of turning into octopuses when you eat a clam!
 * Ride the East or West currants to get a quick lift to the other side of the ocean.
 * No need to worry about getting stock in any coral reefs. It is not possible for Pac-Shark to swim over them.
-* You will know right away if you have won or lost because the sounds of the ocean will tell you...
+* You will know right away if you have won or lost because the ocean will display a message alerting you.
 * See how many points you get for eating different sea creatures on the score display.
 
 ## Challenges Overcome

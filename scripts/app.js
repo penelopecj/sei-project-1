@@ -2,7 +2,6 @@ function init() {
   // * TO DO
   // or Jos suugestion make seperate objects in an orca array for each orca.
   // make separate variables and timers for the octopuses = NO CLASSES
-  // orcapuses come back with 'orca' class
 
 
   // DOM objects
@@ -10,7 +9,6 @@ function init() {
   const startBtn = document.querySelector('#start')
   const playAgainBtn = document.querySelector('#play-again')
   const scoreDisplay = document.querySelector('.score')
-  const cells = []
 
   // constant variables
   const width = 20
@@ -23,25 +21,30 @@ function init() {
       index: 0,
       position: 21,
       background: 'orca',
+      timer: 'timer',
     },
     {
       index: 1,
       position: 38,
       background: 'orca',
+      timer: 'timer',
     },
     {
       index: 2,
       position: 338,
       background: 'orca',
+      timer: 'timer',
     },
     {
       index: 3,
       position: 321,
       background: 'orca',
+      timer: 'timer',
     }
   ]
 
   // variables will change
+  let cells = []
   let sharkClass = 'shark-e'
   let sharkPosition = 365
   let totalScore = 0
@@ -187,6 +190,13 @@ function init() {
         orca.background = 'octopus'
       })
       addOrca()
+      setTimeout(() => {
+        removeOrca()
+        orcas.forEach(orca => {
+          orca.background = 'orca'
+        })
+        addOrca()
+      }, 7000)
     }
   }
 
@@ -218,17 +228,38 @@ function init() {
   function moveOrcaOne() {
     removeOrca(orcas[0].position)
   
-    if (orcas[0].position < 27) {
-      orcas[0].position ++
-    } else if (orcas[0].position > 81 
-      && orcas[0].position <= 87) {
-      orcas[0].position --
-    } else if (orcas[0].position === 27 
-      || orcas[0].position === 47
-      || orcas[0].position === 67) {
-      orcas[0].position += width
-    } else {
-      orcas[0].position -= width
+    // if (orcas[0].position < 27) {
+    //   orcas[0].position ++
+    // } else if (orcas[0].position > 81 
+    //   && orcas[0].position <= 87) {
+    //   orcas[0].position --
+    // } else if (orcas[0].position === 27 
+    //   || orcas[0].position === 47
+    //   || orcas[0].position === 67) {
+    //   orcas[0].position += width
+    // } else {
+    //   orcas[0].position -= width
+    // }
+    if (sharkPosition > orcas[0].position) {
+      if (!checkIfWall(orcas[0].position + 1)) {
+        orcas[0].position ++ // move east
+      } else if (!checkIfWall(orcas[0].position + width)) {
+        orcas[0].position += width // move south
+      } else if (!checkIfWall(orcas[0].position - 1)) {
+        orcas[0].position -- // move west
+      } else if (!checkIfWall(orcas[0].position - width)) {
+        orcas[0].position -= width // move north
+      } 
+    } else if (sharkPosition < orcas[0].position) {
+      if (!checkIfWall(orcas[0].position - 1)) {
+        orcas[0].position -- // move west
+      } else if (!checkIfWall(orcas[0].position - width)) {
+        orcas[0].position -= width // move north
+      } else if (!checkIfWall(orcas[0].position + width)) {
+        orcas[0].position += width // move south
+      } else if (!checkIfWall(orcas[0].position + 1)) {
+        orcas[0].position ++ // move east
+      } 
     }
 
     addOrca(orcas[0].position)
@@ -455,7 +486,7 @@ function init() {
       }
     })
     if (fishCells.length < 1) {
-      window.alert('You won!!!! 🏆')
+      grid.innerHTML = 'You won!!!! 🏆'
     }
   }
 
@@ -466,9 +497,8 @@ function init() {
         if (orca.background === 'octopus') {
           removeOrca()
           totalScore += 150
-        } else {
-          window.alert('You lost! 😭')
-          console.log('You lost! 😭')
+        } else if (grid.innerHTML !== 'You won!!!! 🏆') {
+          grid.innerHTML = 'You lost! 😭'
         }  
       }
     })
