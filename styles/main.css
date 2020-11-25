@@ -80,6 +80,12 @@ header p {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
 .grid-wrapper {
   display: flex; 
   justify-content: center;
@@ -280,15 +286,31 @@ header p {
     background-image: url('../images/octopus-flare.png');
   }
   75% {
-    background-image: url('../images/octopus-style.png');
+    background-image: url('../images/octopus-swag.png');
   }
   100% {
     background-image: url('../images/octopus.png');
   }
 }
 
-footer {
-  display: flex;
-  justify-content: center;
-  color: white;
+/* OCTOPUS FLASHING CLASS */
+.grid div.octopus-flash {
+  background-image: url('../images/octopus.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: flash;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flash {
+  0% {
+    background-image: url('../images/octopus.png');
+  }
+  50% {
+    background-image: url('../images/octopus-flash.png');;
+  }
+  100% {
+    background-image: url('../images/octopus-style.png');
+  }
 }

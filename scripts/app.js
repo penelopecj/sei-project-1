@@ -204,10 +204,17 @@ function init() {
       setTimeout(() => {
         removeOrca()
         orcas.forEach(orca => {
+          orca.background = 'octopus-flash'
+        })
+        addOrca()
+      }, 4500)
+      setTimeout(() => {
+        removeOrca()
+        orcas.forEach(orca => {
           orca.background = 'orca'
         })
         addOrca()
-      }, 7000)
+      }, 8000)
     }
   }
 
