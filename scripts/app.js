@@ -59,6 +59,7 @@ function init() {
   let sharkY = Math.floor(sharkPosition / width)
   let totalScore = 0
   let playing = false
+  let randomCell = 0
 
   // * loop to MAKE GRID
   for (let i = 0; i < cellCount; i++) {
@@ -167,6 +168,11 @@ function init() {
     }
   })
 
+  // Add lobsters
+  // setInterval(() => {
+  //   randomCell = cells[Math.floor(Math.random() * 400)]
+  //   randomCell.classList.add('lobster')
+  // }, 30000)
 
   // ? GAME PLAY FUNCTIONS *********
   function checkIfWall(position) {
@@ -666,9 +672,12 @@ function init() {
     const sharkClassList = cells[sharkPosition].classList
     if (sharkClassList.contains(fishClass)) {
       totalScore += 20
-    } else if (sharkClassList.contains(shellClass)){
+    } else if (sharkClassList.contains(shellClass)) {
       totalScore += 50
-    }
+    } 
+    // else if (sharkClassList.contains('lobster')) {
+    // totalScore += 100
+    // }
     scoreDisplay.innerHTML = totalScore
   }
 

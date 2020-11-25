@@ -120,17 +120,24 @@ footer {
   background-size: contain;
 }
 
+/* LOBSTER CLASS */
+.grid div.lobster {
+  background-image: url('../images/lobster.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 /* SHELL CLASS */
 .grid div.shell {
   background-image: url('../images/shell.png');
   background-repeat: no-repeat;
   background-size: contain;
-  /* animation: flash;
-  animation-duration: 0.3s;
-  animation-iteration-count: infinite; */
+  animation: blink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite; 
 }
 
-/* @keyframes flash {
+@keyframes blink {
   0% {
     background-image: url('../images/shell.png');
   }
@@ -140,7 +147,7 @@ footer {
   100% {
     background-image: url('../images/shell.png');
   }
-} */
+} 
 
 /* WALL CLASS */
 .grid div.wall {
