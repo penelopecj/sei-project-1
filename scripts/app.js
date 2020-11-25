@@ -201,14 +201,17 @@ function init() {
         orca.background = 'octopus'
       })
       addOrca()
-      setTimeout(() => {
-        removeOrca()
-        orcas.forEach(orca => {
-          orca.background = 'octopus-flash'
-        })
-        addOrca()
-      }, 4500)
-      setTimeout(() => {
+
+      //Need to disable the first timeouts if a second shell is eaten.
+      // const flashTimeout = setTimeout(() => {
+      //   removeOrca()
+      //   orcas.forEach(orca => {
+      //     orca.background = 'octopus-flash'
+      //   })
+      //   addOrca()
+      // }, 4500)
+
+      const orcaTimeout = setTimeout(() => {
         removeOrca()
         orcas.forEach(orca => {
           orca.background = 'orca'
@@ -217,15 +220,6 @@ function init() {
       }, 8000)
     }
   }
-
-  // function becomeOrca(position) {
-  //   removeOrca()
-  //   orcas.filter(orca => {
-  //     if (orca.position === position) {
-  //       orca.background = 'orca'
-  //     }
-  //   })
-  // }
 
   function removeFish(position) {
     cells[position].classList.remove(fishClass)
@@ -302,16 +296,31 @@ function init() {
     //   } 
     // }
 
-    // * intelligent logic
-    if (sharkX > orcas[0].x && !checkIfWall(orcas[0].position + 1)) {
-      orcas[0].position ++ // move east
-    } else if (sharkY > orcas[0].y && !checkIfWall(orcas[0].position + width)) {
-      orcas[0].position += width // move south
-    } else if (sharkX < orcas[0].x && !checkIfWall(orcas[0].position - 1)) {
-      orcas[0].position -- // move west
-    } else if (sharkY < orcas[0].y && !checkIfWall(orcas[0].position - width)) {
-      orcas[0].position -= width // move north
+    // ! attack logic
+    if (orcas[0].background === 'orca') {
+      if (sharkX > orcas[0].x && !checkIfWall(orcas[0].position + 1)) {
+        orcas[0].position ++ // move east
+      } else if (sharkY > orcas[0].y && !checkIfWall(orcas[0].position + width)) {
+        orcas[0].position += width // move south
+      } else if (sharkX < orcas[0].x && !checkIfWall(orcas[0].position - 1)) {
+        orcas[0].position -- // move west
+      } else if (sharkY < orcas[0].y && !checkIfWall(orcas[0].position - width)) {
+        orcas[0].position -= width // move north
+      } 
     } 
+    // ? escape logic 
+    if (orcas[0].background === 'octopus'){
+      if (sharkX < orcas[0].x && !checkIfWall(orcas[0].position + 1)) {
+        orcas[0].position ++ // move east
+      } else if (sharkY < orcas[0].y && !checkIfWall(orcas[0].position + width)) {
+        orcas[0].position += width // move south
+      } else if (sharkX > orcas[0].x && !checkIfWall(orcas[0].position - 1)) {
+        orcas[0].position -- // move west
+      } else if (sharkY > orcas[0].y && !checkIfWall(orcas[0].position - width)) {
+        orcas[0].position -= width // move north
+      } 
+    }
+
 
     orcas[0].x = orcas[0].position % width
     orcas[0].y = Math.floor(orcas[0].position / width)
@@ -325,7 +334,6 @@ function init() {
       
       if (orcas[0].position === sharkPosition) {
         clearInterval(orcaOneTimer)
-  
         setTimeout(() => {
           removeOrca()
           orcas[0].background = 'orca'
@@ -364,16 +372,30 @@ function init() {
     //   orcas[1].position -= width
     // }
 
-    // * intelligent logic
-    if (sharkX > orcas[1].x && !checkIfWall(orcas[1].position + 1)) {
-      orcas[1].position ++ // move east
-    } else if (sharkY > orcas[1].y && !checkIfWall(orcas[1].position + width)) {
-      orcas[1].position += width // move south
-    } else if (sharkX < orcas[1].x && !checkIfWall(orcas[1].position - 1)) {
-      orcas[1].position -- // move west
-    } else if (sharkY < orcas[1].y && !checkIfWall(orcas[1].position - width)) {
-      orcas[1].position -= width // move north
+    // ! attack logic
+    if (orcas[1].background === 'orca') {
+      if (sharkX > orcas[1].x && !checkIfWall(orcas[1].position + 1)) {
+        orcas[1].position ++ // move east
+      } else if (sharkY > orcas[1].y && !checkIfWall(orcas[1].position + width)) {
+        orcas[1].position += width // move south
+      } else if (sharkX < orcas[1].x && !checkIfWall(orcas[1].position - 1)) {
+        orcas[1].position -- // move west
+      } else if (sharkY < orcas[1].y && !checkIfWall(orcas[1].position - width)) {
+        orcas[1].position -= width // move north
+      } 
     } 
+    // ? escape logic 
+    if (orcas[1].background === 'octopus'){
+      if (sharkX < orcas[1].x && !checkIfWall(orcas[1].position + 1)) {
+        orcas[1].position ++ // move east
+      } else if (sharkY < orcas[1].y && !checkIfWall(orcas[1].position + width)) {
+        orcas[1].position += width // move south
+      } else if (sharkX > orcas[1].x && !checkIfWall(orcas[1].position - 1)) {
+        orcas[1].position -- // move west
+      } else if (sharkY > orcas[1].y && !checkIfWall(orcas[1].position - width)) {
+        orcas[1].position -= width // move north
+      } 
+    }
 
     orcas[1].x = orcas[1].position % width
     orcas[1].y = Math.floor(orcas[1].position / width)
@@ -426,16 +448,30 @@ function init() {
     //   orcas[2].position += width
     // }
 
-    // * intelligent logic
-    if (sharkX > orcas[2].x && !checkIfWall(orcas[2].position + 1)) {
-      orcas[2].position ++ // move east
-    } else if (sharkY > orcas[2].y && !checkIfWall(orcas[2].position + width)) {
-      orcas[2].position += width // move south
-    } else if (sharkX < orcas[2].x && !checkIfWall(orcas[2].position - 1)) {
-      orcas[2].position -- // move west
-    } else if (sharkY < orcas[2].y && !checkIfWall(orcas[2].position - width)) {
-      orcas[2].position -= width // move north
+    // ! attack logic
+    if (orcas[2].background === 'orca') {
+      if (sharkX > orcas[2].x && !checkIfWall(orcas[2].position + 1)) {
+        orcas[2].position ++ // move east
+      } else if (sharkY > orcas[2].y && !checkIfWall(orcas[2].position + width)) {
+        orcas[2].position += width // move south
+      } else if (sharkX < orcas[2].x && !checkIfWall(orcas[2].position - 1)) {
+        orcas[2].position -- // move west
+      } else if (sharkY < orcas[2].y && !checkIfWall(orcas[2].position - width)) {
+        orcas[2].position -= width // move north
+      } 
     } 
+    // ? escape logic 
+    if (orcas[2].background === 'octopus'){
+      if (sharkX < orcas[2].x && !checkIfWall(orcas[2].position + 1)) {
+        orcas[2].position ++ // move east
+      } else if (sharkY < orcas[2].y && !checkIfWall(orcas[2].position + width)) {
+        orcas[2].position += width // move south
+      } else if (sharkX > orcas[2].x && !checkIfWall(orcas[2].position - 1)) {
+        orcas[2].position -- // move west
+      } else if (sharkY > orcas[2].y && !checkIfWall(orcas[2].position - width)) {
+        orcas[2].position -= width // move north
+      } 
+    }
 
     orcas[2].x = orcas[2].position % width
     orcas[2].y = Math.floor(orcas[2].position / width)
@@ -487,16 +523,30 @@ function init() {
     //   orcas[3].position += width
     // }
 
-    // * intelligent logic
-    if (sharkX > orcas[3].x && !checkIfWall(orcas[3].position + 1)) {
-      orcas[3].position ++ // move east
-    } else if (sharkY > orcas[3].y && !checkIfWall(orcas[3].position + width)) {
-      orcas[3].position += width // move south
-    } else if (sharkX < orcas[3].x && !checkIfWall(orcas[3].position - 1)) {
-      orcas[3].position -- // move west
-    } else if (sharkY < orcas[3].y && !checkIfWall(orcas[3].position - width)) {
-      orcas[3].position -= width // move north
+    // ! attack logic
+    if (orcas[3].background === 'orca') {
+      if (sharkX > orcas[3].x && !checkIfWall(orcas[3].position + 1)) {
+        orcas[3].position ++ // move east
+      } else if (sharkY > orcas[3].y && !checkIfWall(orcas[3].position + width)) {
+        orcas[3].position += width // move south
+      } else if (sharkX < orcas[3].x && !checkIfWall(orcas[3].position - 1)) {
+        orcas[3].position -- // move west
+      } else if (sharkY < orcas[3].y && !checkIfWall(orcas[3].position - width)) {
+        orcas[3].position -= width // move north
+      } 
     } 
+    // ? escape logic 
+    if (orcas[3].background === 'octopus'){
+      if (sharkX < orcas[3].x && !checkIfWall(orcas[3].position + 1)) {
+        orcas[3].position ++ // move east
+      } else if (sharkY < orcas[3].y && !checkIfWall(orcas[3].position + width)) {
+        orcas[3].position += width // move south
+      } else if (sharkX > orcas[3].x && !checkIfWall(orcas[3].position - 1)) {
+        orcas[3].position -- // move west
+      } else if (sharkY > orcas[3].y && !checkIfWall(orcas[3].position - width)) {
+        orcas[3].position -= width // move north
+      } 
+    }
 
     orcas[3].x = orcas[3].position % width
     orcas[3].y = Math.floor(orcas[3].position / width)
