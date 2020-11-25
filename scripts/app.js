@@ -20,24 +20,32 @@ function init() {
     {
       index: 0,
       position: 21,
+      x: this.position % width,
+      y: Math.floor(this.position / width),
       background: 'orca',
       timer: 'timer',
     },
     {
       index: 1,
       position: 38,
+      x: this.position % width,
+      y: Math.floor(this.position / width),
       background: 'orca',
       timer: 'timer',
     },
     {
       index: 2,
       position: 338,
+      x: this.position % width,
+      y: Math.floor(this.position / width),
       background: 'orca',
       timer: 'timer',
     },
     {
       index: 3,
       position: 321,
+      x: this.position % width,
+      y: Math.floor(this.position / width),
       background: 'orca',
       timer: 'timer',
     }
@@ -47,7 +55,10 @@ function init() {
   let cells = []
   let sharkClass = 'shark-e'
   let sharkPosition = 365
+  let sharkX = sharkPosition % width
+  let sharkY = Math.floor(sharkPosition / width)
   let totalScore = 0
+  let playing = false
 
   // * loop to MAKE GRID
   for (let i = 0; i < cellCount; i++) {
@@ -224,7 +235,7 @@ function init() {
   })
 
 
-  // ? MOVE ORCA 1 FUNCTION **********
+  // ? ORCA 1 LOGIC **********
   function moveOrcaOne() {
     removeOrca(orcas[0].position)
   
@@ -240,192 +251,276 @@ function init() {
     // } else {
     //   orcas[0].position -= width
     // }
-    if (sharkPosition > orcas[0].position) {
-      if (!checkIfWall(orcas[0].position + 1)) {
-        orcas[0].position ++ // move east
-      } else if (!checkIfWall(orcas[0].position + width)) {
-        orcas[0].position += width // move south
-      } else if (!checkIfWall(orcas[0].position - 1)) {
-        orcas[0].position -- // move west
-      } else if (!checkIfWall(orcas[0].position - width)) {
-        orcas[0].position -= width // move north
-      } 
-    } else if (sharkPosition < orcas[0].position) {
-      if (!checkIfWall(orcas[0].position - 1)) {
-        orcas[0].position -- // move west
-      } else if (!checkIfWall(orcas[0].position - width)) {
-        orcas[0].position -= width // move north
-      } else if (!checkIfWall(orcas[0].position + width)) {
-        orcas[0].position += width // move south
-      } else if (!checkIfWall(orcas[0].position + 1)) {
-        orcas[0].position ++ // move east
-      } 
-    }
+    // if (sharkPosition > orcas[0].position) {
+    //   if (!checkIfWall(orcas[0].position + 1)) {
+    //     orcas[0].position ++ // move east
+    //   } else if (!checkIfWall(orcas[0].position + width)) {
+    //     orcas[0].position += width // move south
+    //   } else if (!checkIfWall(orcas[0].position - 1)) {
+    //     orcas[0].position -- // move west
+    //   } else if (!checkIfWall(orcas[0].position - width)) {
+    //     orcas[0].position -= width // move north
+    //   } 
+    // } else if (sharkPosition < orcas[0].position) {
+    //   if (!checkIfWall(orcas[0].position - 1)) {
+    //     orcas[0].position -- // move west
+    //   } else if (!checkIfWall(orcas[0].position - width)) {
+    //     orcas[0].position -= width // move north
+    //   } else if (!checkIfWall(orcas[0].position + width)) {
+    //     orcas[0].position += width // move south
+    //   } else if (!checkIfWall(orcas[0].position + 1)) {
+    //     orcas[0].position ++ // move east
+    //   } 
+    // }
+    
+    // if (sharkX >= orcas[0].x && !checkIfWall(orcas[0].position + 1)) {
+    //   orcas[0].position ++ // move east
+    // } else if (sharkY >= orcas[0].y && !checkIfWall(orcas[0].position + width)) {
+    //   orcas[0].position += width // move south
+    // } else if (sharkX < orcas[0].x && !checkIfWall(orcas[0].position - 1)) {
+    //   orcas[0].position -- // move west
+    // } else if (sharkY < orcas[0].y && !checkIfWall(orcas[0].position - width)) {
+    //   orcas[0].position -= width // move north
+    // } 
 
+    // } else if (sharkPosition < orcas[0].position) {
+    //   if (!checkIfWall(orcas[0].position - 1)) {
+    //     orcas[0].position -- // move west
+    //   } else if (!checkIfWall(orcas[0].position - width)) {
+    //     orcas[0].position -= width // move north
+    //   } else if (!checkIfWall(orcas[0].position + width)) {
+    //     orcas[0].position += width // move south
+    //   } else if (!checkIfWall(orcas[0].position + 1)) {
+    //     orcas[0].position ++ // move east
+    //   } 
+    // }
+
+    // * intelligent logic
+    if (sharkX > orcas[0].x && !checkIfWall(orcas[0].position + 1)) {
+      orcas[0].position ++ // move east
+    } else if (sharkY > orcas[0].y && !checkIfWall(orcas[0].position + width)) {
+      orcas[0].position += width // move south
+    } else if (sharkX < orcas[0].x && !checkIfWall(orcas[0].position - 1)) {
+      orcas[0].position -- // move west
+    } else if (sharkY < orcas[0].y && !checkIfWall(orcas[0].position - width)) {
+      orcas[0].position -= width // move north
+    } 
+
+    orcas[0].x = orcas[0].position % width
+    orcas[0].y = Math.floor(orcas[0].position / width)
     addOrca(orcas[0].position)
   }
+
+  // ? RELEASE ORCA 1 FUNCTION **********
+  function releaseOrcaOne() {
+    let orcaOneTimer = setInterval(() => {
+      handleCollide()
+      
+      if (orcas[0].position === sharkPosition) {
+        clearInterval(orcaOneTimer)
   
-  let orcaOneTimer = setInterval(() => {
-    handleCollide()
-    
-    if (orcas[0].position === sharkPosition) {
-      clearInterval(orcaOneTimer)
-
-      setTimeout(() => {
-        removeOrca()
-        orcas[0].background = 'orca'
-        addOrca()
-        orcaOneTimer = setInterval(() => {
-          handleCollide()
-          
-          if (orcas[0].position === sharkPosition) {
-            clearInterval(orcaOneTimer)
-          }
-          moveOrcaOne()
-        }, 500)
-      }, 5000)
-    }
-    moveOrcaOne()
-  }, 500)   
-
+        setTimeout(() => {
+          removeOrca()
+          orcas[0].background = 'orca'
+          addOrca()
+          orcaOneTimer = setInterval(() => {
+            handleCollide()
+            
+            if (orcas[0].position === sharkPosition) {
+              clearInterval(orcaOneTimer)
+            }
+            moveOrcaOne()
+          }, 500)
+        }, 5000)
+      }
+      moveOrcaOne()
+    }, 500)   
+  }
   
 
-  // ? MOVE ORCA 2 FUNCTION **********
+  // ? MOVE ORCA 2 LOGIC **********
   function moveOrcaTwo() {
     removeOrca(orcas[1].position)
 
-    if (orcas[1].position > 32 
-      && orcas[1].position <= 38) {
-      orcas[1].position --
-    } else if (orcas[1].position === 32 
-      || orcas[1].position === 52
-      || orcas[1].position === 72) {
-      orcas[1].position += width
-    } else if (orcas[1].position >= 92 
-      && orcas[1].position < 98) {
-      orcas[1].position ++
-    } else {
-      orcas[1].position -= width
-    }
+    // stupid logic
+    // if (orcas[1].position > 32 
+    //   && orcas[1].position <= 38) {
+    //   orcas[1].position --
+    // } else if (orcas[1].position === 32 
+    //   || orcas[1].position === 52
+    //   || orcas[1].position === 72) {
+    //   orcas[1].position += width
+    // } else if (orcas[1].position >= 92 
+    //   && orcas[1].position < 98) {
+    //   orcas[1].position ++
+    // } else {
+    //   orcas[1].position -= width
+    // }
 
+    // * intelligent logic
+    if (sharkX > orcas[1].x && !checkIfWall(orcas[1].position + 1)) {
+      orcas[1].position ++ // move east
+    } else if (sharkY > orcas[1].y && !checkIfWall(orcas[1].position + width)) {
+      orcas[1].position += width // move south
+    } else if (sharkX < orcas[1].x && !checkIfWall(orcas[1].position - 1)) {
+      orcas[1].position -- // move west
+    } else if (sharkY < orcas[1].y && !checkIfWall(orcas[1].position - width)) {
+      orcas[1].position -= width // move north
+    } 
+
+    orcas[1].x = orcas[1].position % width
+    orcas[1].y = Math.floor(orcas[1].position / width)
     addOrca(orcas[1].position)
   }
   
-  let orcaTwoTimer = setInterval(() => {
-    handleCollide()
+  // ? RELEASE ORCA 2 FUNCTION **********
+  function releaseOrcaTwo() {
+    let orcaTwoTimer = setInterval(() => {
+      handleCollide()
+  
+      if (orcas[1].position === sharkPosition) {
+        clearInterval(orcaTwoTimer)
+        setTimeout(() => {
+          removeOrca()
+          orcas[1].background = 'orca'
+          addOrca()
+          orcaTwoTimer = setInterval(() => {
+            handleCollide()
+        
+            if (orcas[1].position === sharkPosition) {
+              clearInterval(orcaTwoTimer)
+            }
+            moveOrcaTwo()
+          }, 500)
+        }, 5000)
+      }
+      moveOrcaTwo()
+    }, 500) 
+  }
+  
 
-    if (orcas[1].position === sharkPosition) {
-      clearInterval(orcaTwoTimer)
-      setTimeout(() => {
-        removeOrca()
-        orcas[1].background = 'orca'
-        addOrca()
-        orcaTwoTimer = setInterval(() => {
-          handleCollide()
-      
-          if (orcas[1].position === sharkPosition) {
-            clearInterval(orcaTwoTimer)
-          }
-          moveOrcaTwo()
-        }, 500)
-      }, 5000)
-    }
-    moveOrcaTwo()
-  }, 500) 
 
-
-
-  // ? MOVE ORCA 3 FUNCTION **********
+  // ? ORCA 3 LOGIC **********
   function moveOrcaThree() {
     removeOrca()
 
-    if (orcas[2].position > 333 
-      && orcas[2].position <= 338) {
-      orcas[2].position --
-    } else if (orcas[2].position === 333 
-      || orcas[2].position === 313
-      || orcas[2].position === 293
-      || orcas[2].position === 273) {
-      orcas[2].position -= width
-    } else if (orcas[2].position >= 253 
-      && orcas[2].position < 258) {
-      orcas[2].position ++
-    } else {
-      orcas[2].position += width
-    }
+    // if (orcas[2].position > 333 
+    //   && orcas[2].position <= 338) {
+    //   orcas[2].position --
+    // } else if (orcas[2].position === 333 
+    //   || orcas[2].position === 313
+    //   || orcas[2].position === 293
+    //   || orcas[2].position === 273) {
+    //   orcas[2].position -= width
+    // } else if (orcas[2].position >= 253 
+    //   && orcas[2].position < 258) {
+    //   orcas[2].position ++
+    // } else {
+    //   orcas[2].position += width
+    // }
 
+    // * intelligent logic
+    if (sharkX > orcas[2].x && !checkIfWall(orcas[2].position + 1)) {
+      orcas[2].position ++ // move east
+    } else if (sharkY > orcas[2].y && !checkIfWall(orcas[2].position + width)) {
+      orcas[2].position += width // move south
+    } else if (sharkX < orcas[2].x && !checkIfWall(orcas[2].position - 1)) {
+      orcas[2].position -- // move west
+    } else if (sharkY < orcas[2].y && !checkIfWall(orcas[2].position - width)) {
+      orcas[2].position -= width // move north
+    } 
+
+    orcas[2].x = orcas[2].position % width
+    orcas[2].y = Math.floor(orcas[2].position / width)
     addOrca()
   }
 
-  let orcaThreeTimer = setInterval(() => {
-    handleCollide()
-
-    if (orcas[2].position === sharkPosition) {
-      clearInterval(orcaThreeTimer)
-      setTimeout(() => {
-        // orcas[2].position = 338
-        removeOrca()
-        orcas[2].background = 'orca'
-        addOrca()
-        orcaThreeTimer = setInterval(() => {
-          handleCollide()
-
-          if (orcas[2].position === sharkPosition) {
-            clearInterval(orcaThreeTimer)
-          }
-          moveOrcaThree()
-        }, 500)
-      }, 5000)  
-    }
-    moveOrcaThree()
-  }, 500)
-
+  // ? RELEASE ORCA 3 FUNCTION **********
+  function releaseOrcaThree() {
+    let orcaThreeTimer = setInterval(() => {
+      handleCollide()
   
-
-  // ? MOVE ORCA 4 FUNCTION **********
+      if (orcas[2].position === sharkPosition) {
+        clearInterval(orcaThreeTimer)
+        setTimeout(() => {
+          // orcas[2].position = 338
+          removeOrca()
+          orcas[2].background = 'orca'
+          addOrca()
+          orcaThreeTimer = setInterval(() => {
+            handleCollide()
+  
+            if (orcas[2].position === sharkPosition) {
+              clearInterval(orcaThreeTimer)
+            }
+            moveOrcaThree()
+          }, 500)
+        }, 5000)  
+      }
+      moveOrcaThree()
+    }, 500)
+  }
+  
+  // ? ORCA 4 LOGIC **********
   function moveOrcaFour() {
     removeOrca(orcas[3].position)
 
-    if (orcas[3].position > 320 
-      && orcas[3].position < 326) {
-      orcas[3].position ++
-    } else if (orcas[3].position === 326 
-      || orcas[3].position === 306
-      || orcas[3].position === 286
-      || orcas[3].position === 266) {
-      orcas[3].position -= width
-    } else if (orcas[3].position > 241 
-      && orcas[3].position <= 246) {
-      orcas[3].position --
-    } else {
-      orcas[3].position += width
-    }
+    // if (orcas[3].position > 320 
+    //   && orcas[3].position < 326) {
+    //   orcas[3].position ++
+    // } else if (orcas[3].position === 326 
+    //   || orcas[3].position === 306
+    //   || orcas[3].position === 286
+    //   || orcas[3].position === 266) {
+    //   orcas[3].position -= width
+    // } else if (orcas[3].position > 241 
+    //   && orcas[3].position <= 246) {
+    //   orcas[3].position --
+    // } else {
+    //   orcas[3].position += width
+    // }
+
+    // * intelligent logic
+    if (sharkX > orcas[3].x && !checkIfWall(orcas[3].position + 1)) {
+      orcas[3].position ++ // move east
+    } else if (sharkY > orcas[3].y && !checkIfWall(orcas[3].position + width)) {
+      orcas[3].position += width // move south
+    } else if (sharkX < orcas[3].x && !checkIfWall(orcas[3].position - 1)) {
+      orcas[3].position -- // move west
+    } else if (sharkY < orcas[3].y && !checkIfWall(orcas[3].position - width)) {
+      orcas[3].position -= width // move north
+    } 
+
+    orcas[3].x = orcas[3].position % width
+    orcas[3].y = Math.floor(orcas[3].position / width)
     addOrca(orcas[3].position)
   }
 
-  let orcaFourTimer = setInterval(() => {
-    handleCollide()
-
-    if (orcas[3].position === sharkPosition) {
-      clearInterval(orcaFourTimer)
-      setTimeout(() => {
-        // orcas[3].position = 321
-        removeOrca()
-        orcas[3].background = 'orca'
-        addOrca()
-        orcaFourTimer = setInterval(() => {
-          handleCollide()
-            
-          if (orcas[3].position === sharkPosition) {
-            clearInterval(orcaFourTimer)
-          }
-          moveOrcaFour()
-        }, 500) 
-      }, 5000)
-    }
-    moveOrcaFour()
-  }, 500) 
+  // ? RELEASE ORCA 4 ******
+  function releaseOrcaFour() {
+    let orcaFourTimer = setInterval(() => {
+      handleCollide()
   
+      if (orcas[3].position === sharkPosition) {
+        clearInterval(orcaFourTimer)
+        setTimeout(() => {
+          // orcas[3].position = 321
+          removeOrca()
+          orcas[3].background = 'orca'
+          addOrca()
+          orcaFourTimer = setInterval(() => {
+            handleCollide()
+              
+            if (orcas[3].position === sharkPosition) {
+              clearInterval(orcaFourTimer)
+            }
+            moveOrcaFour()
+          }, 500) 
+        }, 5000)
+      }
+      moveOrcaFour()
+    }, 500) 
+  }
 
   // ? MOVE PAC-SHARK function **********
   function handleKeyDown(event) {
@@ -461,9 +556,14 @@ function init() {
       default:
         console.log('Not a valid key!')
     }
+    // release the killer whales
+    handleStart()
+
     // add Shark-Man at new location
     addShark(sharkPosition, sharkClass)
-    
+    sharkX = sharkPosition % width
+    sharkY = Math.floor(sharkPosition / width)
+
     // expect to pop up with the current score
     addPoints()
 
@@ -517,7 +617,14 @@ function init() {
 
   // ? START GAME function **********
   function handleStart() {
-    addShark(sharkPosition, sharkClass)
+    if (playing === false) {
+      playing = true
+      addShark(sharkPosition, sharkClass)
+      releaseOrcaOne()
+      releaseOrcaTwo()
+      releaseOrcaThree()
+      releaseOrcaFour()
+    }
   }
 
   // ? RELOAD GAME function **********
