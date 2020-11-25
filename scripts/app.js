@@ -1,11 +1,8 @@
 function init() {
   // * TO DO
-  // orcapuses come back with 'orca' class
-  // make separate variables and timers for the octopuses = NO CLASSES
-  // or make a become orca function?
   // or Jos suugestion make seperate objects in an orca array for each orca.
-
-
+  // make separate variables and timers for the octopuses = NO CLASSES
+  // orcapuses come back with 'orca' class
 
 
   // DOM objects
@@ -47,7 +44,6 @@ function init() {
   // variables will change
   let sharkClass = 'shark-e'
   let sharkPosition = 365
-  // let orcaClass = 'orca'
   let totalScore = 0
 
   // * loop to MAKE GRID
@@ -186,28 +182,18 @@ function init() {
 
   function becomeOcto() {
     if (cells[sharkPosition].classList.contains(shellClass)) {
-      // removeOrca(orcas[0].position)
-      // removeOrca(orcas[1].position)
-      // removeOrca(orcas[2].position)
-      // removeOrca(orcas[3].position)
-      // orcaClass = 'octopus'
+      removeOrca()
       orcas.forEach(orca => {
-        removeOrca(orca.position)
         orca.background = 'octopus'
       })
-
+      addOrca()
     }
   }
   function becomeOrca(position) {
-    // removeOrca(orcas[0].position)
-    // removeOrca(orcas[1].position)
-    // removeOrca(orcas[2].position)
-    // removeOrca(orcas[3].position)
-    // orcaClass = 'orca'
+    removeOrca()
     orcas.filter(orca => {
       if (orca.position === position) {
         orca.background = 'orca'
-        console.log(orca)
       }
     })
   }
@@ -247,11 +233,25 @@ function init() {
     addOrca(orcas[0].position)
   }
   
-  const orcaOneTimer = setInterval(() => {
+  let orcaOneTimer = setInterval(() => {
     handleCollide()
     
     if (orcas[0].position === sharkPosition) {
       clearInterval(orcaOneTimer)
+
+      setTimeout(() => {
+        removeOrca()
+        orcas[0].background = 'orca'
+        addOrca()
+        orcaOneTimer = setInterval(() => {
+          handleCollide()
+          
+          if (orcas[0].position === sharkPosition) {
+            clearInterval(orcaOneTimer)
+          }
+          moveOrcaOne()
+        }, 500)
+      }, 5000)
     }
     moveOrcaOne()
   }, 500)   
@@ -279,15 +279,26 @@ function init() {
     addOrca(orcas[1].position)
   }
   
-  const orcaTwoTimer = setInterval(() => {
+  let orcaTwoTimer = setInterval(() => {
     handleCollide()
 
     if (orcas[1].position === sharkPosition) {
       clearInterval(orcaTwoTimer)
+      setTimeout(() => {
+        removeOrca()
+        orcas[1].background = 'orca'
+        addOrca()
+        orcaTwoTimer = setInterval(() => {
+          handleCollide()
+      
+          if (orcas[1].position === sharkPosition) {
+            clearInterval(orcaTwoTimer)
+          }
+          moveOrcaTwo()
+        }, 500)
+      }, 5000)
     }
-
     moveOrcaTwo()
-    
   }, 500) 
 
 
@@ -332,7 +343,7 @@ function init() {
           }
           moveOrcaThree()
         }, 500)
-      }, 7000)  
+      }, 5000)  
     }
     moveOrcaThree()
   }, 500)
@@ -366,22 +377,20 @@ function init() {
     if (orcas[3].position === sharkPosition) {
       clearInterval(orcaFourTimer)
       setTimeout(() => {
-        orcas[3].position = 321
-        becomeOrca(orcas[3].position)
-        addOrca(orcas[3].position)
+        // orcas[3].position = 321
+        removeOrca()
+        orcas[3].background = 'orca'
+        addOrca()
         orcaFourTimer = setInterval(() => {
           handleCollide()
             
           if (orcas[3].position === sharkPosition) {
             clearInterval(orcaFourTimer)
           }
-            
           moveOrcaFour()
-
         }, 500) 
-      }, 7000)
+      }, 5000)
     }
-
     moveOrcaFour()
   }, 500) 
   
@@ -462,40 +471,6 @@ function init() {
         }  
       }
     })
-
-
-
-    // if (sharkPosition === orcas[0].position) {
-    //   if (orcaClass === 'octopus') {
-    //     removeOrca(orcas[0].position)
-    //     totalScore += 150
-    //   } else {
-    //     window.alert('You lost! 😭')
-    //   }  
-    // } else if (sharkPosition === orcas[1].position) {
-    //   if (orcaClass === 'octopus') {
-    //     removeOrca(orcas[1].position)
-    //     totalScore += 150
-    //   } else {
-    //     window.alert('You lost! 😭')
-    //   }  
-    // } else if (sharkPosition === orcas[2].position) {
-    //   if (orcaClass === 'octopus') {
-    //     totalScore += 150
-    //     removeOrca(orcas[2].position)
-    //   } else {
-    //     window.alert('You lost! 😭')
-    //   }  
-    // } else if (sharkPosition === orcas[3].position) {
-    //   if (orcaClass === 'octopus') {
-    //     removeOrca(orcas[3].position)
-    //     totalScore += 15
-    //   } else {
-    //     window.alert('You lost! 😭')
-    //   }  
-    // }
-
-
   }
 
   // ? SCORING function **********
