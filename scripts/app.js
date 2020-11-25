@@ -189,14 +189,15 @@ function init() {
       addOrca()
     }
   }
-  function becomeOrca(position) {
-    removeOrca()
-    orcas.filter(orca => {
-      if (orca.position === position) {
-        orca.background = 'orca'
-      }
-    })
-  }
+
+  // function becomeOrca(position) {
+  //   removeOrca()
+  //   orcas.filter(orca => {
+  //     if (orca.position === position) {
+  //       orca.background = 'orca'
+  //     }
+  //   })
+  // }
 
   function removeFish(position) {
     cells[position].classList.remove(fishClass)
@@ -435,14 +436,14 @@ function init() {
     // expect to pop up with the current score
     addPoints()
 
+    // change all killer whales to octopuses
+    becomeOcto()
+
     // check if player lost just now
     handleCollide()
 
     // check if player won just now
     handleWin()
-
-    // change all killer whales to octopuses
-    becomeOcto()
   }
   
   // ? CHECK IF WON function **********
@@ -458,7 +459,7 @@ function init() {
     }
   }
 
-  // ? PAC-SHARK COLLISION function **********
+  // ! COLLIDE/LOSE function **********
   function handleCollide() {
     orcas.forEach(orca => {
       if (sharkPosition === orca.position) {
