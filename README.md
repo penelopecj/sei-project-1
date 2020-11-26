@@ -43,3 +43,16 @@ by Penny Jungreis
 * Game loads to a separate Menu page.
 * User can choose level, speed, and theme.
 * High scores are tracked and displayed.
+
+
+## Credits
+
+Pac-Shark image by Penelope Jungreis.
+
+Animal emoji images by Apple.
+
+Ocean background image provided by Shutterstock (https://www.shutterstock.com/).
+
+All sounds provided by Orange Free Sounds (http://www.orangefreesounds.com/).
+
+All fonts provided by Google Fonts.
