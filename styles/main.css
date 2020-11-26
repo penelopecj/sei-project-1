@@ -42,8 +42,8 @@ header img {
 }
 
 header p {
-  margin-top: 0;
-  color: rgb(0, 94, 255);
+  margin-top: -10px;
+  color: rgb(0, 74, 203);
   font-style: italic;
 }
 
@@ -226,6 +226,8 @@ footer {
   animation: chomp-e;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
+  transform: scale(1.2);
+  border-radius: 50px;
 }
 
 /* PAC-SHARK WEST-FACING */
@@ -236,6 +238,8 @@ footer {
   animation: chomp-w;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
+  transform: scale(1.2);
+  border-radius: 50px;
 }
 
 /* PAC-SHARK NORTH-FACING */
@@ -246,6 +250,8 @@ footer {
   animation: chomp-n;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
+  transform: scale(1.2);
+  border-radius: 50px;
 }
 
 /* PAC-SHARK SOUTH-FACING */
@@ -256,6 +262,8 @@ footer {
   animation: chomp-s;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
+  transform: scale(1.2);
+  border-radius: 50px;
 }
 
 @keyframes chomp-e {
