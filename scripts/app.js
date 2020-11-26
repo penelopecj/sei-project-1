@@ -6,9 +6,12 @@ function init() {
 
   // DOM objects
   const grid = document.querySelector('.grid')
+  const soundBtn = document.querySelector('#sound')
+  const rulesBtn = document.querySelector('#rules')
   const startBtn = document.querySelector('#start')
   const playAgainBtn = document.querySelector('#play-again')
   const scoreDisplay = document.querySelector('.score')
+  const audio = document.querySelector('audio')
 
   // constant variables
   const width = 20
@@ -220,6 +223,7 @@ function init() {
         addOrca()
       }, 4500)
 
+      // ! Need to disable the first timeouts if a second shell is eaten.
       const orcaTimeout = setTimeout(() => {
         removeOrca()
         orcas.forEach(orca => {
@@ -696,6 +700,16 @@ function init() {
     scoreDisplay.innerHTML = totalScore
   }
 
+  function handlePlaySound() {
+    console.log('play Jaws theme!')
+    audio.src = ''
+  }
+
+  function handleDisplayRules() {
+    rulesBtn.classList.toggle('how-to-play')
+  }
+
+
   // ? START GAME function **********
   function handleStart() {
     if (playing === false) {
@@ -716,6 +730,8 @@ function init() {
 
   // * Event Listeners ************
   document.addEventListener('keydown', handleKeyDown)
+  soundBtn.addEventListener('click', handlePlaySound)
+  rulesBtn.addEventListener('click', handleDisplayRules)
   startBtn.addEventListener('click', handleStart)
   playAgainBtn.addEventListener('click', handleReset)
 
