@@ -58,6 +58,7 @@ function init() {
   // variables will change
   let cells = []
   let sharkClass = 'shark-e'
+  let bonusClass = ''
   let sharkPosition = 365
   let sharkX = sharkPosition % width
   let sharkY = Math.floor(sharkPosition / width)
@@ -175,11 +176,22 @@ function init() {
     }
   })
 
-  // Add lobsters
-  // setInterval(() => {
-  //   randomCell = cells[Math.floor(Math.random() * 400)]
-  //   randomCell.classList.add('lobster')
-  // }, 30000)
+  // Add random bonus point sea creatures
+  function beginAddingBonusFish() {
+    setInterval(() => {
+      randomCell = cells[Math.floor(Math.random() * 400)]
+      const randomNumber = Math.floor(Math.random() * 3)
+      if (randomNumber === 1) {
+        bonusClass = 'lobster'
+      } else if (randomNumber === 2) {
+        bonusClass = 'blowfish'
+      } else {
+        bonusClass = 'tropical'
+      }
+      randomCell.classList.add(bonusClass)
+    }, 3000)
+  }
+  
 
   // ? GAME PLAY FUNCTIONS *********
   function checkIfWall(position) {
@@ -256,6 +268,12 @@ function init() {
 
   function removeShell(position) {
     cells[position].classList.remove(shellClass)
+  }
+
+  function removeBonus(position) {
+    cells[position].classList.remove('lobster')
+    cells[position].classList.remove('blowfish')
+    cells[position].classList.remove('tropical')
   }
 
 
@@ -625,6 +643,7 @@ function init() {
     removeShark(sharkPosition)
     removeFish(sharkPosition)
     removeShell(sharkPosition)
+    removeBonus(sharkPosition)
 
     switch (event.keyCode) {
       case 39: //move east
@@ -678,8 +697,7 @@ function init() {
   // ? CHECK IF WON function **********
   function handleWin() {
     const fishCells = cells.filter(cell => {
-      if (cell.classList.contains(fishClass) 
-      || (cell.classList.contains(shellClass))) {
+      if (cell.classList.contains(fishClass) || cell.classList.contains(shellClass)) {
         return cell
       }
     })
@@ -712,10 +730,13 @@ function init() {
       totalScore += 20
     } else if (sharkClassList.contains(shellClass)) {
       totalScore += 50
-    } 
-    // else if (sharkClassList.contains('lobster')) {
-    // totalScore += 100
-    // }
+    } else if (sharkClassList.contains('lobster')) {
+      totalScore += 115
+    } else if (sharkClassList.contains('blowfish')) {
+      totalScore += 85
+    } else if (sharkClassList.contains('tropical')) {
+      totalScore += 65
+    }
     scoreDisplay.innerHTML = totalScore
   }
 
@@ -745,6 +766,7 @@ function init() {
       releaseOrcaTwo()
       releaseOrcaThree()
       releaseOrcaFour()
+      beginAddingBonusFish()
     }
   }
 

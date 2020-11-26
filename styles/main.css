@@ -19,13 +19,27 @@ header {
   flex-direction: column;
   align-items: center;
   margin: 0;
+  background: linear-gradient(white, rgba(58, 209, 255, 0.3));
+  box-shadow: 0 0 10px 10px rgba(58, 209, 255, 0.3);
+}
+
+header .pac-shark-logo {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  margin-left: 20px;
 }
 
 header h1 {
   color: navy;
-  margin-bottom: 0.3rem;
+  font-size: 2rem;
+  margin: 7px 0 0 0;
   font-family: 'Galindo', cursive;
 } 
+
+header img {
+  width: 80px;
+}
 
 header p {
   margin-top: 0;
@@ -59,13 +73,15 @@ header p {
 
 #rules > ul {
   font-family: Arial, Helvetica, sans-serif;
+  color: rgb(232, 232, 232); 
   width: 90%;
   text-align: left;
   margin: 1rem auto;
+  list-style-image: url('../images/shell-bullet.png')
 }
 
 #rules > ul > li {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 #rules > ul > li > img {
@@ -73,6 +89,7 @@ header p {
   width: 100px;
   border-radius: 50px;
   border: 1px solid rgb(35, 87, 120);
+  margin: 5px;
 }
 
 .how-to-play {
@@ -154,6 +171,20 @@ footer {
 /* LOBSTER CLASS */
 .grid div.lobster {
   background-image: url('../images/lobster.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* TROPICAL CLASS */
+.grid div.tropical {
+  background-image: url('../images/tropical.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* BLOWFISH CLASS */
+.grid div.blowfish {
+  background-image: url('../images/blowfish.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
