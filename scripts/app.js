@@ -211,22 +211,22 @@ function init() {
       addOrca()
       console.log(orcas[0].background)
 
-      //Need to disable the first timeouts if a second shell is eaten.
-      // const flashTimeout = setTimeout(() => {
-      //   removeOrca()
-      //   orcas.forEach(orca => {
-      //     orca.background = 'octopus-flash'
-      //   })
-      //   addOrca()
-      // }, 4500)
+      // ! Need to disable the first timeouts if a second shell is eaten.
+      const flashTimeout = setTimeout(() => {
+        removeOrca()
+        orcas.forEach(orca => {
+          orca.background = 'octopus-flash'
+        })
+        addOrca()
+      }, 4500)
 
-      // const orcaTimeout = setTimeout(() => {
-      //   removeOrca()
-      //   orcas.forEach(orca => {
-      //     orca.background = 'orca'
-      //   })
-      //   addOrca()
-      // }, 8000)
+      const orcaTimeout = setTimeout(() => {
+        removeOrca()
+        orcas.forEach(orca => {
+          orca.background = 'orca'
+        })
+        addOrca()
+      }, 8000)
     }
   }
 
@@ -671,9 +671,9 @@ function init() {
   function handleCollide() {
     orcas.forEach(orca => {
       if (sharkPosition === orca.position) {
-        if (orca.background === 'octopus') {
-          orca.background = 'octopus'
+        if (orca.background === 'octopus' || orca.background === null) {
           removeOrca()
+          orca.background = null
           totalScore += 150
         } else if (orca.background === 'orca' || grid.innerHTML !== 'You won!!!! 🏆') {
           grid.innerHTML = 'You lost! 😭'
