@@ -8,6 +8,7 @@ function init() {
   const grid = document.querySelector('.grid')
   const soundBtn = document.querySelector('#sound')
   const rulesBtn = document.querySelector('#rules')
+  const rulesP = document.querySelector('#rules > ul')
   const startBtn = document.querySelector('#start')
   const playAgainBtn = document.querySelector('#play-again')
   const scoreDisplay = document.querySelector('.score')
@@ -62,6 +63,7 @@ function init() {
   let sharkY = Math.floor(sharkPosition / width)
   let totalScore = 0
   let playing = false
+  let audioPlaying = false
   let randomCell = 0
 
   // * loop to MAKE GRID
@@ -215,13 +217,13 @@ function init() {
       console.log(orcas[0].background)
 
       // ! Need to disable the first timeouts if a second shell is eaten.
-      const flashTimeout = setTimeout(() => {
-        removeOrca()
-        orcas.forEach(orca => {
-          orca.background = 'octopus-flash'
-        })
-        addOrca()
-      }, 4500)
+      // const flashTimeout = setTimeout(() => {
+      //   removeOrca()
+      //   orcas.forEach(orca => {
+      //     orca.background = 'octopus-flash'
+      //   })
+      //   addOrca()
+      // }, 4500)
 
       // ! Need to disable the first timeouts if a second shell is eaten.
       const orcaTimeout = setTimeout(() => {
@@ -701,12 +703,19 @@ function init() {
   }
 
   function handlePlaySound() {
-    console.log('play Jaws theme!')
-    audio.src = ''
+    if (audioPlaying === false) {
+      audio.src = './sounds/Jaws-theme-song.mp3'
+      audio.play()
+      audioPlaying = true
+    } else {
+      audio.src = ''
+      audioPlaying = false
+    }
   }
 
   function handleDisplayRules() {
     rulesBtn.classList.toggle('how-to-play')
+    rulesP.classList.toggle('hide-list')
   }
 
 

@@ -3,12 +3,13 @@
 by Penny Jungreis
 
 ## How to Play
-* Click "Start Game" to bein.
+* Click "Start Game" to begin.
 * Use your arrow keys to move Pac-Shark around in the ocean.
 * Make sure to avoid the killer whales - they eat sharks!!
+* Eat the clams to get super powers!
+* Eat the octopuses to make them disappear.
 * Eat all of the fish to win the game.
-* Eat the clams, crustacea, tropical fish, and octopuses to get extra points.
-* Make sure to chew the octopuses thorughly as they are quite hardy.
+* Eat the crustacea and tropical fish to get extra points.
 
 ## Game Features
 * Click start game or press any arrow key to add Pac-Shark to the grid.
