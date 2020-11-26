@@ -220,13 +220,15 @@ function init() {
 
       // ! Need to disable the first timeouts if a second shell is eaten.
 
-      if (!!flashTimeout) {
+      if (flashTimeout) {
         clearTimeout(flashTimeout)
       } 
       flashTimeout = setTimeout(() => {
         removeOrca()
         orcas.forEach(orca => {
-          orca.background = 'octopus-flash'
+          if (orca.background !== null) {
+            orca.background = 'octopus-flash'
+          }
         })
         addOrca()
       }, 4500)
@@ -235,7 +237,7 @@ function init() {
 
       // ! Need to disable the first timeouts if a second shell is eaten.
       
-      if (!!orcaTimeout) {
+      if (orcaTimeout) {
         clearTimeout(orcaTimeout)
       } 
       orcaTimeout = setTimeout(() => {
@@ -619,6 +621,7 @@ function init() {
 
   // ? MOVE PAC-SHARK function **********
   function handleKeyDown(event) {
+    event.preventDefault()
     removeShark(sharkPosition)
     removeFish(sharkPosition)
     removeShell(sharkPosition)
@@ -689,11 +692,13 @@ function init() {
   function handleCollide() {
     orcas.forEach(orca => {
       if (sharkPosition === orca.position) {
-        if (orca.background === 'octopus' || orca.background === 'octopus-flash' || orca.background === null) {
+        if (orca.background === 'octopus' 
+        || orca.background === 'octopus-flash' 
+        || orca.background === null) {
           removeOrca()
           orca.background = null
           totalScore += 150
-        } else if (orca.background === 'orca' || grid.innerHTML !== 'You won!!!! 🏆') {
+        } else if (grid.innerHTML !== 'You won!!!! 🏆') {
           grid.innerHTML = 'You lost! 😭'
         }  
       }

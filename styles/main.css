@@ -5,7 +5,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: teal;
-  /* How do I make this cover the whole page? */
   background-image: url('../images/ocean.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,8 +24,6 @@ header {
 header h1 {
   color: navy;
   margin-bottom: 0.3rem;
-  /* font-family: 'Londrina Shadow', cursive; */
-  /* font-family: 'Nerko One', cursive; */
   font-family: 'Galindo', cursive;
 } 
 
@@ -73,10 +70,9 @@ header p {
 
 #rules > ul > li > img {
   float: right;
-  width: 70px;
+  width: 100px;
   border-radius: 50px;
   border: 1px solid rgb(35, 87, 120);
-  margin: 5px;
 }
 
 .how-to-play {
