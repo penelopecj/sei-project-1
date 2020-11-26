@@ -43,14 +43,14 @@ header p {
 }
 
 .menu button {
-  font-family: ;
+  font-family: 'Galindo', cursive;
   color: white;
   font-size: 1.3rem;
   margin: 0 1rem;
-  background-color: rgba(0, 128, 128, 0.5);
+  background-color: rgba(0, 128, 128);
   padding: 10px;
   border-radius: 25px;
-  border: 1px solid rgb(0, 128, 128);
+  border: 1px solid rgb(0, 94, 94);
   cursor: pointer;
 }
 
@@ -61,17 +61,25 @@ header p {
 }
 
 #rules > ul {
-width: 90%;
-text-align: left;
-margin: 1rem auto;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 90%;
+  text-align: left;
+  margin: 1rem auto;
 }
 
 #rules > ul > li {
   margin-top: 1rem;
 }
 
+#rules > ul > li > img {
+  float: right;
+  width: 70px;
+  border-radius: 50px;
+  border: 1px solid rgb(35, 87, 120);
+  margin: 5px;
+}
+
 .how-to-play {
-  height: 50vh;
   width: 50vw;
   position: absolute;
 }
