@@ -3,7 +3,7 @@
 ## Pac-Shark
 by Penny Jungreis
 
-!(shark-e.png)
+![Pac-Shark](./images/shark-e.png)
 
 ## How to Play
 * Click "Start Game" to begin.
