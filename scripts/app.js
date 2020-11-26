@@ -64,6 +64,8 @@ function init() {
   let totalScore = 0
   let playing = false
   let audioPlaying = false
+  let flashTimeout = false
+  let orcaTimeout = false
   let randomCell = 0
 
   // * loop to MAKE GRID
@@ -217,16 +219,26 @@ function init() {
       console.log(orcas[0].background)
 
       // ! Need to disable the first timeouts if a second shell is eaten.
-      // const flashTimeout = setTimeout(() => {
-      //   removeOrca()
-      //   orcas.forEach(orca => {
-      //     orca.background = 'octopus-flash'
-      //   })
-      //   addOrca()
-      // }, 4500)
+
+      if (!!flashTimeout) {
+        clearTimeout(flashTimeout)
+      } 
+      flashTimeout = setTimeout(() => {
+        removeOrca()
+        orcas.forEach(orca => {
+          orca.background = 'octopus-flash'
+        })
+        addOrca()
+      }, 4500)
+      
+      
 
       // ! Need to disable the first timeouts if a second shell is eaten.
-      const orcaTimeout = setTimeout(() => {
+      
+      if (!!orcaTimeout) {
+        clearTimeout(orcaTimeout)
+      } 
+      orcaTimeout = setTimeout(() => {
         removeOrca()
         orcas.forEach(orca => {
           orca.background = 'orca'
@@ -327,7 +339,7 @@ function init() {
       addOrca(orcas[0].position)
     } 
     // ? escape logic 
-    if (orcas[0].background === 'octopus'){
+    if (orcas[0].background === 'octopus' || orcas[0].background === 'octopus-flash'){
       if (sharkX < orcas[0].x && !checkIfWall(orcas[0].position + 1)) {
         orcas[0].position ++ // move east
       } else if (sharkY < orcas[0].y && !checkIfWall(orcas[0].position + width)) {
@@ -403,7 +415,7 @@ function init() {
       addOrca(orcas[1].position)
     } 
     // ? escape logic 
-    if (orcas[1].background === 'octopus'){
+    if (orcas[1].background === 'octopus' || orcas[1].background === 'octopus-flash'){
       if (sharkX < orcas[1].x && !checkIfWall(orcas[1].position + 1)) {
         orcas[1].position ++ // move east
       } else if (sharkY < orcas[1].y && !checkIfWall(orcas[1].position + width)) {
@@ -483,7 +495,7 @@ function init() {
       addOrca()
     } 
     // ? escape logic 
-    if (orcas[2].background === 'octopus'){
+    if (orcas[2].background === 'octopus' || orcas[2].background === 'octopus-flash'){
       if (sharkX < orcas[2].x && !checkIfWall(orcas[2].position + 1)) {
         orcas[2].position ++ // move east
       } else if (sharkY < orcas[2].y && !checkIfWall(orcas[2].position + width)) {
@@ -561,7 +573,7 @@ function init() {
       addOrca(orcas[3].position)
     } 
     // ? escape logic 
-    if (orcas[3].background === 'octopus'){
+    if (orcas[3].background === 'octopus' || orcas[3].background === 'octopus-flash'){
       if (sharkX < orcas[3].x && !checkIfWall(orcas[3].position + 1)) {
         orcas[3].position ++ // move east
       } else if (sharkY < orcas[3].y && !checkIfWall(orcas[3].position + width)) {
@@ -677,7 +689,7 @@ function init() {
   function handleCollide() {
     orcas.forEach(orca => {
       if (sharkPosition === orca.position) {
-        if (orca.background === 'octopus' || orca.background === null) {
+        if (orca.background === 'octopus' || orca.background === 'octopus-flash' || orca.background === null) {
           removeOrca()
           orca.background = null
           totalScore += 150
