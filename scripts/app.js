@@ -15,6 +15,7 @@ function init() {
   const audio = document.querySelector('audio')
 
   // constant variables
+  const cells = []
   const width = 20
   const cellCount = width * width
   const fishClass = 'fish'
@@ -56,7 +57,6 @@ function init() {
   ]
 
   // variables will change
-  let cells = []
   let sharkClass = 'shark-e'
   let bonusClass = ''
   let sharkPosition = 365
@@ -65,6 +65,7 @@ function init() {
   let totalScore = 0
   let playing = false
   let audioPlaying = false
+  let splashPlaying = false
   let flashTimeout = false
   let orcaTimeout = false
   let randomCell = 0
@@ -703,9 +704,10 @@ function init() {
     })
     if (fishCells.length < 1) {
       grid.innerHTML = 'You won!!!! 🏆'
+      audio.src = './sounds/Sparkle-sound-effect.mp3'
+      audio.play()
     }
   }
-
   // ! COLLIDE/LOSE function **********
   function handleCollide() {
     orcas.forEach(orca => {
@@ -718,6 +720,12 @@ function init() {
           totalScore += 150
         } else if (grid.innerHTML !== 'You won!!!! 🏆') {
           grid.innerHTML = 'You lost! 😭'
+          if (!splashPlaying) {
+            audio.src = './sounds/Big-water-splash-sound-effect.mp3'
+            audio.play()
+            splashPlaying = true
+          } 
+          
         }  
       }
     })
