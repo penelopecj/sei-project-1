@@ -1,15 +1,18 @@
 # SEI Project 1
 
+## Pac-Shark
 by Penny Jungreis
+
+!(shark-e.png)
 
 ## How to Play
 * Click "Start Game" to begin.
 * Use your arrow keys to move Pac-Shark around in the ocean.
 * Make sure to avoid the killer whales - they eat sharks!!
-* Eat the clams to get super powers!
-* Eat the octopuses to make them disappear.
+* Eat the clams to scare the killer whales away.
+* Eat the octopuses to clear your path and get bonus points.
 * Eat all of the fish to win the game.
-* Eat the crustacea and tropical fish to get extra points.
+* Eat the crustacea and tropical fish to get extra points.   
 
 ## Game Features
 * Click start game or press any arrow key to add Pac-Shark to the grid.
