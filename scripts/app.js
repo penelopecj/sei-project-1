@@ -1,8 +1,4 @@
 function init() {
-  // * TO DO
-  // or Jos suugestion make seperate objects in an orca array for each orca.
-  // make separate variables and timers for the octopuses = NO CLASSES
-
 
   // DOM objects
   const grid = document.querySelector('.grid')
@@ -704,8 +700,10 @@ function init() {
     })
     if (fishCells.length < 1) {
       grid.innerHTML = 'You won!!!! 🏆'
-      audio.src = './sounds/Sparkle-sound-effect.mp3'
-      audio.play()
+      if (audioPlaying === true) {
+        audio.src = './sounds/Sparkle-sound-effect.mp3'
+        audio.play()
+      }
     }
   }
   // ! COLLIDE/LOSE function **********
@@ -720,7 +718,7 @@ function init() {
           totalScore += 150
         } else if (grid.innerHTML !== 'You won!!!! 🏆') {
           grid.innerHTML = 'You lost! 😭'
-          if (!splashPlaying) {
+          if (!splashPlaying && audioPlaying === true) {
             audio.src = './sounds/Big-water-splash-sound-effect.mp3'
             audio.play()
             splashPlaying = true

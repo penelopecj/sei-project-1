@@ -226,7 +226,7 @@ footer {
   animation: chomp-e;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
-  transform: scale(1.2);
+  transform: scale(1.3);
   border-radius: 50px;
 }
 
@@ -238,7 +238,7 @@ footer {
   animation: chomp-w;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
-  transform: scale(1.2);
+  transform: scale(1.3);
   border-radius: 50px;
 }
 
@@ -250,7 +250,7 @@ footer {
   animation: chomp-n;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
-  transform: scale(1.2);
+  transform: scale(1.3);
   border-radius: 50px;
 }
 
@@ -262,7 +262,7 @@ footer {
   animation: chomp-s;
   animation-duration: 0.4s;
   animation-iteration-count: infinite;
-  transform: scale(1.2);
+  transform: scale(1.3);
   border-radius: 50px;
 }
 
