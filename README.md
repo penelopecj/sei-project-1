@@ -45,7 +45,7 @@ by Penny Jungreis
 * Sound effects can start and stop as desired.
 * Killer whales stored in an array for efficient code and scalability.
 
-## Feature Wish List
+## Features Wish List
 * Pac-Shark has multiple lives.
 * Levels become increasingly more difficult.
 * Each killer whales follows a different attack pattern.
