@@ -11,13 +11,14 @@ function init() {
   const audio = document.querySelector('audio')
 
   // constant variables
-  const cells = []
+  const cells = [] // these get added below
   const width = 20
   const cellCount = width * width
   const fishClass = 'fish'
   const shellClass = 'shell'
   const wallClass = 'wall'
   const orcas = [
+    // would be nice to refactor code to include more use of these objects
     {
       index: 0,
       position: 21,
@@ -52,7 +53,7 @@ function init() {
     }
   ]
 
-  // variables will change
+  // variables that will change
   let sharkClass = 'shark-e'
   let bonusClass = ''
   let sharkPosition = 365
@@ -173,7 +174,7 @@ function init() {
     }
   })
 
-  // Add random bonus point sea creatures
+  // * Add random bonus points sea creatures
   function beginAddingBonusFish() {
     setInterval(() => {
       randomCell = cells[Math.floor(Math.random() * 400)]
@@ -186,7 +187,7 @@ function init() {
         bonusClass = 'tropical'
       }
       randomCell.classList.add(bonusClass)
-    }, 3000)
+    }, 5000)
   }
   
 
@@ -223,12 +224,9 @@ function init() {
       orcas.forEach(orca => {
         orca.background = 'octopus'
       })
-      console.log(orcas[0].background)
       addOrca()
-      console.log(orcas[0].background)
 
-      // ! Need to disable the first timeouts if a second shell is eaten.
-
+      // ! Should disable the first timeouts if a second shell is eaten.
       if (flashTimeout) {
         clearTimeout(flashTimeout)
       } 
@@ -244,8 +242,7 @@ function init() {
       
       
 
-      // ! Need to disable the first timeouts if a second shell is eaten.
-      
+      // ! Should disable the first timeouts if a second shell is eaten.
       if (orcaTimeout) {
         clearTimeout(orcaTimeout)
       } 
@@ -284,6 +281,7 @@ function init() {
   function moveOrcaOne() {
     removeOrca(orcas[0].position)
   
+    // OLD MOVEMENT LOGIC
     // if (orcas[0].position < 27) {
     //   orcas[0].position ++
     // } else if (orcas[0].position > 81 
@@ -296,6 +294,7 @@ function init() {
     // } else {
     //   orcas[0].position -= width
     // }
+
     // if (sharkPosition > orcas[0].position) {
     //   if (!checkIfWall(orcas[0].position + 1)) {
     //     orcas[0].position ++ // move east
@@ -480,6 +479,7 @@ function init() {
   function moveOrcaThree() {
     removeOrca()
 
+    // OLD LOGIC
     // if (orcas[2].position > 333 
     //   && orcas[2].position <= 338) {
     //   orcas[2].position --
@@ -532,12 +532,11 @@ function init() {
   // ? RELEASE ORCA 3 FUNCTION **********
   function releaseOrcaThree() {
     let orcaThreeTimer = setInterval(() => {
-      // handleCollide()
+      handleCollide()
   
       if (orcas[2].position === sharkPosition) {
         clearInterval(orcaThreeTimer)
         setTimeout(() => {
-          // orcas[2].position = 338
           removeOrca()
           orcas[2].background = 'orca'
           addOrca()
@@ -559,6 +558,7 @@ function init() {
     removeOrca(orcas[3].position)
     console.log(orcas[3].background)
 
+    // OLD LOGIC
     // if (orcas[3].position > 320 
     //   && orcas[3].position < 326) {
     //   orcas[3].position ++
@@ -609,7 +609,6 @@ function init() {
   // ? RELEASE ORCA 4 ******
   function releaseOrcaFour() {
     let orcaFourTimer = setInterval(() => {
-      // ! Keep this
       handleCollide()
   
     
@@ -673,21 +672,21 @@ function init() {
     // release the killer whales
     handleStart()
 
-    // add Shark-Man at new location
+    // add Pac-Shark at new location
     addShark(sharkPosition, sharkClass)
     sharkX = sharkPosition % width
     sharkY = Math.floor(sharkPosition / width)
 
-    // expect to pop up with the current score
+    // updates the score display with the current score
     addPoints()
 
-    // change all killer whales to octopuses
+    // change ALL killer whales to octopuses
     becomeOcto()
 
-    // check if player lost just now
+    // check if player lost or ate an octopus on this cell
     handleCollide()
 
-    // check if player won just now
+    // check if player won on this cell
     handleWin()
   }
   
@@ -706,6 +705,7 @@ function init() {
       }
     }
   }
+
   // ! COLLIDE/LOSE function **********
   function handleCollide() {
     orcas.forEach(orca => {
@@ -715,7 +715,7 @@ function init() {
         || orca.background === null) {
           removeOrca()
           orca.background = null
-          totalScore += 150
+          totalScore += 100
         } else if (grid.innerHTML !== 'You won!!!! 🏆') {
           grid.innerHTML = 'You lost! 😭'
           if (!splashPlaying && audioPlaying === true) {
@@ -723,7 +723,6 @@ function init() {
             audio.play()
             splashPlaying = true
           } 
-          
         }  
       }
     })
@@ -732,20 +731,21 @@ function init() {
   // ? SCORING function **********
   function addPoints() {
     const sharkClassList = cells[sharkPosition].classList
-    if (sharkClassList.contains(fishClass)) {
-      totalScore += 20
-    } else if (sharkClassList.contains(shellClass)) {
-      totalScore += 50
-    } else if (sharkClassList.contains('lobster')) {
+    if (sharkClassList.contains('lobster')) {
       totalScore += 115
     } else if (sharkClassList.contains('blowfish')) {
-      totalScore += 85
+      totalScore += 95
     } else if (sharkClassList.contains('tropical')) {
-      totalScore += 65
+      totalScore += 75
+    } else if (sharkClassList.contains(shellClass)) {
+      totalScore += 50
+    } else if (sharkClassList.contains(fishClass)) {
+      totalScore += 20
     }
     scoreDisplay.innerHTML = totalScore
   }
 
+  // Enables/disables all game sound effects
   function handlePlaySound() {
     if (audioPlaying === false) {
       audio.src = './sounds/Jaws-theme-song.mp3'
@@ -757,11 +757,11 @@ function init() {
     }
   }
 
+  // Toggles display of rules list
   function handleDisplayRules() {
     rulesBtn.classList.toggle('how-to-play')
     rulesP.classList.toggle('hide-list')
   }
-
 
   // ? START GAME function **********
   function handleStart() {
@@ -781,31 +781,12 @@ function init() {
     window.location.reload()
   }
 
-
   // * Event Listeners ************
   document.addEventListener('keydown', handleKeyDown)
   soundBtn.addEventListener('click', handlePlaySound)
   rulesBtn.addEventListener('click', handleDisplayRules)
   startBtn.addEventListener('click', handleStart)
   playAgainBtn.addEventListener('click', handleReset)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
