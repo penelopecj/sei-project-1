@@ -18,7 +18,6 @@ function init() {
   const shellClass = 'shell'
   const wallClass = 'wall'
   const orcas = [
-    // would be nice to refactor code to include more use of these objects
     {
       index: 0,
       position: 21,
