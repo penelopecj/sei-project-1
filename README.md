@@ -1,11 +1,12 @@
-# General Assembly Project 1: JS Game
-## Pac-Shark by Penny Jungreis
+# 🦈 Pac-Shark - A JavaScript Game
+### Developed by:
+Penny Jungreis - https://github.com/penelopecj
 
-![Pac-Shark](./images/shark-e.png)
-## Deployment
+![Game Screen](./images/Screenshot%202021-02-09%20at%2017.04.00.png)
+### Deployment
 This game was deployed on GitHub Pages and is available to play at [Pac-Shark](https://penelopecj.github.io/pac-shark/).
 
-## Task & Timeframe
+### Task & Timeframe
 Eight days to plan, complete, and deploy a complete browser-based game in Vanilla JS. 
 
 ## Technologies Used
@@ -15,8 +16,6 @@ Eight days to plan, complete, and deploy a complete browser-based game in Vanill
 * GitHub Pages
 * Google Fonts
 * GIMP for drawing images
-
-![Game Screen](./images/Screenshot%202021-02-09%20at%2017.04.00.png)
 
 ## How to Play
 * Click “Start Game” to begin.
@@ -98,7 +97,7 @@ Eight days to plan, complete, and deploy a complete browser-based game in Vanill
 ## Credits
 Pac-Shark image by Penelope Jungreis.
 
-Animal emoji images by Apple.
+Animal emoji images by Apple. 🐙 🐟 🐡 🦞 🐠
 
 Ocean background image provided by Shutterstock (https://www.shutterstock.com/).
 
