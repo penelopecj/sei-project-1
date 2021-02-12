@@ -6,7 +6,7 @@ A JavaScript browser-based game developed in eight days. My first solo project f
 
 ![Game Screen](./images/Screenshot%202021-02-09%20at%2017.04.00.png)
 ## Deployment
-I deployed this game on GitHub Pages and it is available to play at [penelopecj.github.io/pac-shark](https://penelopecj.github.io/pac-shark/).
+I deployed this game on GitHub Pages and it is available to play at [penelopecj.github.io/sei-project-1](https://penelopecj.github.io/sei-project-1/).
 ## Concept
 **Pac-Man** is a classic arcade game from the 80s. The player aims eat all the food in a maze whilst being hunted by ghosts.
 
